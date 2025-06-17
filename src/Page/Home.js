@@ -1,0 +1,241 @@
+import React, { useEffect, useState } from 'react'
+import { Routes, Route } from 'react-router-dom'
+import Loan from './Loan'
+import Investment from './Investment'
+import Info from './Info'
+import About from './About'
+import Notice from './Notice'
+import Faq from './Faq'
+import Login from './Login'
+import Signup from './Signup'
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import './Home.css'
+import axios from 'axios'
+
+export default function Home() {
+    const [notice, setNotice] = useState([]);
+    const [card, setCard] = useState([]);
+    const [status, setStatus] = useState();
+    const [story, setStory] = useState([]);
+
+    useEffect(() => {
+        async function fetchAll() {
+            try {
+                const noticeRes = await axios.get(`${process.env.REACT_APP_SERVER_URL}/common/onlyNoticePreview?q=1748095980882`);
+                setNotice(noticeRes.data.body);
+
+                const cardRes = await axios.get(`${process.env.REACT_APP_SERVER_URL}/product/list?limit=6&q=1748095980883`);
+                setCard(cardRes.data.body.products);
+
+                const statusRes = await axios.get(`${process.env.REACT_APP_SERVER_URL_BUDGET}/loan/main/report?q=1749982044781`);
+                setStatus(statusRes.data);
+
+                const storyRes = await axios.get(`${process.env.REACT_APP_SERVER_URL}/common/mediaNotice?q=1749829498644`);
+                setStory(storyRes.data.body);
+            } catch (e) {
+                console.error(e);
+            }
+        }
+
+        fetchAll();
+    }, []);
+
+    return (
+        <div>
+            <section className='main'>
+                <div>
+                    <Swiper
+                        modules={[Pagination, Autoplay]}
+                        className="main-swiper"
+                        spaceBetween={30}
+                        slidesPerView={1}
+                        loop={true}
+                        autoplay={{ delay: 3000 }}
+                        speed={1500}
+                        pagination={{
+                            el: '.main-swiper-pagination',
+                            clickable: true
+                        }}
+                    >
+                        <SwiperSlide>
+                            <img
+                                src="https://v2.cocktailfunding.com/static/media/app_down.15cdbad0.png"
+                                className="main-img"
+                                alt="Main"
+                            />
+                        </SwiperSlide>
+                        <SwiperSlide>
+                            <img
+                                src='https://v2.cocktailfunding.com/static/media/banner_2024result_1.f70ba21e.png'
+                                className='main-img'
+                                alt='Main'
+                            />
+                        </SwiperSlide>
+                        <SwiperSlide>
+                            <img
+                                src='https://v2.cocktailfunding.com/static/media/banner_2024result_2.bd535f23.png'
+                                className='main-img'
+                                alt='Main'
+                            />
+                        </SwiperSlide>
+                        <div className='main-swiper-pagination'></div>
+                    </Swiper>
+
+                    <div className='notice-swiper-wrapper'>
+                        <Swiper
+                            modules={[Navigation, Autoplay, Pagination]}
+                            className="notice-swiper"
+                            spaceBetween={30}
+                            slidesPerView={1}
+                            loop={true}
+                            autoplay={{ delay: 3000 }}
+                            navigation={{
+                                nextEl: '.button-next',
+                                prevEl: '.button-prev'
+                            }}
+                            speed={1500}
+                        >
+                            {notice.map((nt) => (
+                                <SwiperSlide className='notice-wrapper'>
+                                    <div className='notice-notice'>공지</div>
+                                    <div className='notice-title'>{nt.title}</div>
+                                </SwiperSlide>
+                            ))}
+                        </Swiper>
+                        <div className="handle-button">
+                            <div className='button-prev'>
+                                <img src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEgAAABICAYAAABV7bNHAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAARhJREFUeNrs2kENwkAQheECBtZBkVAZyAAHHHFDLdQFNioBB2yTJvQCt515D/4/aSg9bb7jzHYdEREREREREREREf1Dfd9flyfzDAdhnHv9udXnVEp51h4Z59gL45wVzrIzwBnneb4AJIgjBaSIIwOkiiMBpIyTDqSOkwrkgJMG5IKTAuSEEw7khhMK5IgTBuSKEwLkjNMcyB2n6bhjHXRZ4zQF+pWaTRSXCWAp5Vhfh/XTsPyv3yeA3kiTO1LzmbQ7UsjQ3hkpbKvhihS69nFECt+LuSGlLA6dkNI2qy5IqatnB6T03bw6ksTlBWUkmdsdqkhS118UkeTuB31A4n7QtnWwNnb0PYUreERERERERERERLTpJcAAgDPTO5QYGC4AAAAASUVORK5CYII=' className='prev' />
+                            </div>
+                            <div className='button-next'>
+                                <img src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEgAAABICAYAAABV7bNHAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAQpJREFUeNrs2sEJg0AQQFGTbcAOTAmWZDpIR0kLdpE2LGErSBQWEgLxFuZP+B8WdC8OD/Gw2HVmZmZmZmZmZmZm9g8Nw3DZlhLfcR5tXalzHiFzTFSkEvXgWuu97/vTejm2rXG7X/dngV5IMx2pRA9ARyqEIchIhfIqU5EwQFQkFBARCQdEQ0ICkZCwQBQkNBABCQ8UjZQCKBIpDVAUUiqgHaS6nQ784nnHznY7ZBu4HaxNb1u3ZVnOAgXgpAKKwEkDFIWTAigSBw8UjYMGIuBggSg4SCASDg6IhoMCIuJggKg4CCAyTjgQHSf0uKP9OIXGCQX6CIlD+Dj7C56ZmZmZmZmZmVmmngIMAFOQ0UFLLivGAAAAAElFTkSuQmCC' className='next'></img>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section className='leader-invest'>
+                <div className='invest-wapper'>
+                    <div className='invest-title'>
+                        <div className='invest-header'>리더를 위한 쉬운 투자</div>
+                        <div className='invest-swiper-pagination'></div>
+                        <Swiper
+                            className='invest-card-swiper'
+                            slidesPerView={2}
+                            spaceBetween={60}
+                            loop={true}
+                            pagination={{
+                                el: '.invest-swiper-pagination',
+                                clickable: true,
+                            }}
+                            modules={[Pagination]}
+                        >
+                            <SwiperSlide className='invest-card-wrapper'>
+                                {card.map((cd) => (
+                                    <div className='invest-card'>{cd.amount}{cd.id}{cd.name}</div>
+                                ))}
+                            </SwiperSlide>
+                        </Swiper>
+                        <div className='invest-more' onClick={() => { }}>더보기</div>
+                    </div>
+                    <div className='kakao-wrapper'>
+                        <div className='kakao-channel'>
+                            <div className='kakao-text'>
+                                <h2>리더를 위한 상품 알림</h2>
+                                <h2>칵테일펀딩 채널 추가</h2>
+                            </div>
+                            <img className='kakao-img' src='https://v2.cocktailfunding.com/static/media/middle_banner_kakao.e74027ab.png' />
+                        </div>
+                        <div className='invest-limit'>
+                            <div className='invest-limit-text'>
+                                <h2>내 투자한도는?</h2>
+                                <h2>개인 소득적격 법인 투자자</h2>
+                            </div>
+                            <img className='invest-limit-img' src='https://v2.cocktailfunding.com/static/media/middle_banner_limit.d461ed2f.png' />
+                        </div>
+                    </div>
+                </div>
+            </section >
+
+            <section className='invest-status'>
+                <div className='status-wrapper'>
+                    {status && (
+                        <div className='status-header' style={{ fontSize: '22px' }}>칵테일 펀딩 투자 현황 {status.baseDate}
+                            <div className='status-summery'>
+                                칵테일펀딩을 통해{status.countUser}의 회원이 <br />{status.investAmount}을 투자하여 <br />{status.investInterest}의 수익을 경험하셨습니다.
+                                <div className='status-summery-box'>
+                                    <div className='status-box'>
+                                        누적 대출액<br />
+                                        {status.loanAmount}
+                                    </div>
+                                    <div className='status-box'>
+                                        총 상환금액<br />
+                                        {status.loanBalance}
+                                    </div>
+                                    <div className='status-box'>
+                                        대출 잔액<br />
+                                        {status.totalReturnAmount}
+                                    </div>
+                                    <div className='status-box'>
+                                        평균 수익률<br />
+                                        {status.avgInterestRate}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>)}
+                    <div className='status-info'></div>
+                    <div className='status-more'>공시자료 상세보기</div>
+                </div>
+            </section>
+            <section className='cocktail-story'>
+                <div className='story-wrapper'>
+                    <div style={{ fontSize: '22px' }}>칵테일 펀딩 이야기</div>
+                    <div className='story-swiper-pagination'></div>
+                    <Swiper
+                        modules={[Pagination]}
+                        className='story-swiper'
+                        spaceBetween={30}
+                        slidesPerView={3}
+                        pagination={{
+                            el: '.story-swiper-pagination',
+                            clickable: true
+                        }}
+                    >
+                        <SwiperSlide className='story-box-wrapper'>
+                            {story.map((story) => (
+                                <div className='story-box'>
+                                    <div className='story-title'>{story.title}</div>
+                                    <div className='story-body'>{story.body}</div>
+                                </div>
+                            ))}
+                        </SwiperSlide>
+                    </Swiper>
+                </div>
+            </section>
+
+            <footer>
+                <div className='footer-wrapper'>
+                    <div className='footer-first'>
+                        <a></a>
+                    </div>
+                    <div className='footer-second'></div>
+                </div>
+            </footer>
+
+            <Routes>
+                <Route path='/loan' element={<Loan />} />
+                <Route path='/investment' element={<Investment />} />
+                <Route path='/info' element={<Info />} />
+                <Route path='/notice' element={<Notice />} />
+                <Route path='/about' element={<About />} />
+                <Route path='/faq' element={<Faq />} />
+                <Route path='/login' element={<Login />} />
+                <Route path='/signup' element={<Signup />} />
+            </Routes>
+        </div >
+    )
+}
