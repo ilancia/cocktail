@@ -212,6 +212,7 @@ export default function Home() {
                                     <div className='story-body'>{story.body}</div>
                                 </div>
                             ))}
+                            
                         </SwiperSlide>
                     </Swiper>
                 </div>
