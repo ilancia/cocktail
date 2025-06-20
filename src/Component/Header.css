@@ -1,10 +1,11 @@
 .header{
+    margin: auto;
     width: 80%;
-    margin: 0 auto;
+    padding: 20px;
     display: flex;
 }
 .home-img-wrapper {
-    width: 40px;
+    width: 55px;
 }
 
 .home-img {
@@ -14,18 +15,24 @@
 .header-wrapper {
     width: 100%;
     height: 40px;
-    display: inline-block;
+    display: flex;
+    align-items: center;
+    margin: auto;
 }
 
 .header-left {
-    width: fit-content;
+    font-size:30px;
+    width: 45%;
     display: flex;
-    justify-content: space-around;
+    justify-content:space-evenly;
+    float: left;
+    margin-right: auto;
 }
 
 .header-right {
-    width: fit-content;
-    margin: 0 auto;
+    font-size:30px;
+    width: 25%;
     display: flex;
+    justify-content: space-evenly;
     float: right;
 }

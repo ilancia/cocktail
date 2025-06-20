@@ -9,7 +9,7 @@ import Faq from './Faq'
 import Login from './Login'
 import Signup from './Signup'
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+import { Navigation, Pagination, Autoplay, Grid } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -58,7 +58,10 @@ export default function Home() {
                         speed={1500}
                         pagination={{
                             el: '.main-swiper-pagination',
-                            clickable: true
+                            bulletClass:"main-swiper-pagination-bullet",
+                            bulletActiveClass:"main-swiper-pagination-bullet-active",
+                            type:'bullets',
+                            clickable: true,
                         }}
                     >
                         <SwiperSlide>
@@ -82,12 +85,12 @@ export default function Home() {
                                 alt='Main'
                             />
                         </SwiperSlide>
-                        <div className='main-swiper-pagination'></div>
                     </Swiper>
+                    <div className='main-swiper-pagination'></div>
 
                     <div className='notice-swiper-wrapper'>
                         <Swiper
-                            modules={[Navigation, Autoplay, Pagination]}
+                            modules={[Navigation, Autoplay]}
                             className="notice-swiper"
                             spaceBetween={30}
                             slidesPerView={1}
@@ -102,7 +105,7 @@ export default function Home() {
                             {notice.map((nt) => (
                                 <SwiperSlide className='notice-wrapper'>
                                     <div className='notice-notice'>공지</div>
-                                    <div className='notice-title'>{nt.title}</div>
+                                    <div className='notice-title'>{nt.title}{nt.updated_at}</div>
                                 </SwiperSlide>
                             ))}
                         </Swiper>
@@ -122,24 +125,31 @@ export default function Home() {
                 <div className='invest-wapper'>
                     <div className='invest-title'>
                         <div className='invest-header'>리더를 위한 쉬운 투자</div>
-                        <div className='invest-swiper-pagination'></div>
+                        <div className='invest-card-swiper-pagination'></div>
+                        {card.length > 0 &&
                         <Swiper
-                            className='invest-card-swiper'
-                            slidesPerView={2}
-                            spaceBetween={60}
-                            loop={true}
-                            pagination={{
-                                el: '.invest-swiper-pagination',
-                                clickable: true,
-                            }}
-                            modules={[Pagination]}
+                        className='invest-card-swiper'
+                        slidesPerView={4}
+                        spaceBetween={30}
+                        loop={true}
+                        pagination={{
+                            el: '.invest-card-swiper-pagination',
+                            clickable: true,
+                        }}
+                        grid={{
+                            fill: "row",
+                            rows: 2,
+                        }}
+                        modules={[Pagination, Grid]}
+                        // breakpoints={}
                         >
-                            <SwiperSlide className='invest-card-wrapper'>
-                                {card.map((cd) => (
+                            {card.map((cd) => (
+                                <SwiperSlide className='invest-card-wrapper'>
                                     <div className='invest-card'>{cd.amount}{cd.id}{cd.name}</div>
-                                ))}
-                            </SwiperSlide>
+                                </SwiperSlide>
+                            ))}
                         </Swiper>
+                        }
                         <div className='invest-more' onClick={() => { }}>더보기</div>
                     </div>
                     <div className='kakao-wrapper'>
@@ -164,7 +174,7 @@ export default function Home() {
             <section className='invest-status'>
                 <div className='status-wrapper'>
                     {status && (
-                        <div className='status-header' style={{ fontSize: '22px' }}>칵테일 펀딩 투자 현황 {status.baseDate}
+                        <div className='status-header' style={{ fontSize: '25px' }}>칵테일 펀딩 투자 현황 {status.baseDate}
                             <div className='status-summery'>
                                 칵테일펀딩을 통해{status.countUser}의 회원이 <br />{status.investAmount}을 투자하여 <br />{status.investInterest}의 수익을 경험하셨습니다.
                                 <div className='status-summery-box'>
@@ -191,9 +201,10 @@ export default function Home() {
                     <div className='status-more'>공시자료 상세보기</div>
                 </div>
             </section>
+
             <section className='cocktail-story'>
+                <div style={{ fontSize: '22px' }}>칵테일 펀딩 이야기</div>
                 <div className='story-wrapper'>
-                    <div style={{ fontSize: '22px' }}>칵테일 펀딩 이야기</div>
                     <div className='story-swiper-pagination'></div>
                     <Swiper
                         modules={[Pagination]}
@@ -205,15 +216,14 @@ export default function Home() {
                             clickable: true
                         }}
                     >
-                        <SwiperSlide className='story-box-wrapper'>
-                            {story.map((story) => (
+                        {story.map((story) => (
+                            <SwiperSlide >
                                 <div className='story-box'>
                                     <div className='story-title'>{story.title}</div>
-                                    <div className='story-body'>{story.body}</div>
+                                    <div className='story-body'>{story.body.replace(/<[^>]+>/g, '')}</div>
                                 </div>
-                            ))}
-                            
-                        </SwiperSlide>
+                            </SwiperSlide>
+                        ))}
                     </Swiper>
                 </div>
             </section>

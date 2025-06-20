@@ -1,7 +1,7 @@
 .main {
     border-bottom: 4px solid #00999d;
     margin: 0 auto;
-    width: 100%;
+    width: 80%;
 }
 
 .main-swiper {
@@ -13,24 +13,27 @@
     width: 100%;
 }
 
+.main-swiper-pagination{
+    margin: auto;
+}
+
 .main-swiper-pagination-bullet {
     background: gray !important;
     width: 20px;
-    background: transparent;
     height: 5px;
     transition: width .5s;
     border-radius: 5px;
 }
 
-.main-pagination-bullet-active {
+.main-swiper-pagination-bullet-active {
     width: 10px;
     border-radius: 5px;
     background: #00999d !important;
-    border: 1px solid transparent;
+    border: 1px solid;
 }
 
-.notice-swiper-wrapper{
-    width: 80%;
+.notice-swiper-wrapper {
+    width: 100%;
     display: flex;
     margin: 0 auto;
     align-items: center;
@@ -47,20 +50,23 @@
     height: 56px;
     display: flex;
     align-items: center;
+    float: left;
 }
 
 .notice-notice {
+    font-size: 20px;
     width: fit-content;
     height: fit-content;
     color: #00999d;
     border: 1px solid #00999d;
-    font-size: 14px;
-    padding: 8px 17px;
+    padding: 8px 20px;
     border-radius: 20px;
+    margin-right: 20px;
 }
 
 .notice-title {
-    width: 50%;
+    font-size: 25px;
+    width: 45%;
     height: fit-content;
 }
 
@@ -69,6 +75,7 @@
     height: 100%;
     display: flex;
     overflow: hidden;
+    float: right;
 }
 
 .button-prev {
@@ -103,9 +110,13 @@
     border-bottom: 4px solid #00a8ad;
     width: 80%;
     margin: 0 auto;
+    height: auto;
+}
+.invest-header{
+    font-size: 25px;
 }
 
-.invest-swiper-pagination-bullet {
+.invest-card-swiper-pagination-bullet {
     background: gray !important;
     width: 20px;
     background: transparent;
@@ -115,21 +126,24 @@
     height: 5px;
 }
 
-.invest-swiper-pagination-bullet-active {
+.invest-card-swiper-pagination-bullet-active {
     height: 5px;
     width: 10px;
     border-radius: 5px;
     background: #00999d !important;
     border: 1px solid transparent;
 }
-.invest-card-swiper{
-    width: 80%;
-    height: 400px;
-}
-.invest-card-wrapper {
-    display: flex;
-    flex-wrap: wrap;
 
+.invest-card-swiper {
+    width: 90%;
+    height: fit-content;
+    margin: 20px 0;
+}
+
+.invest-card-wrapper {
+    /* display: flex; */
+    flex-wrap: nowrap;
+    width: 100%;
 }
 
 .invest-card {
@@ -138,7 +152,7 @@
     border-radius: 10px;
     cursor: pointer;
     width: 50%;
-    height: 160px;
+    padding: 17px;
 }
 
 .invest-more:hover {
@@ -166,7 +180,9 @@
 .kakao-wrapper {
     display: flex;
     justify-content: space-between;
+    margin: 0 auto;
     margin-bottom: 50px;
+    width: 90%;
 }
 
 .kakao-channel {
@@ -190,7 +206,7 @@
     width: 12%;
 }
 
-.invest-limit{
+.invest-limit {
     display: flex;
     width: 48%;
     background-color: #dff4f4;
@@ -218,19 +234,23 @@
 }
 
 .status-summery {
+    font-size: 20px;
     margin: 0 auto 25px;
-    font-size: 14px;
     text-align: center;
     word-break: break-word;
     word-wrap: break-word;
     color: #6a6a6a;
     line-height: 1.5;
 }
-.status-summery-box{
+
+.status-summery-box {
     display: flex;
+    width: 90%;
+    margin: 0 auto;
 }
 
-.status-box{
+.status-box {
+    font-size: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -261,6 +281,12 @@
     color: white;
 }
 
+.cocktail-story{
+    width: 80%;
+    margin: 0 auto;
+    height: 500px;
+}
+
 .story-swiper-pagination-bullet {
     background: gray !important;
     width: 20px;
@@ -271,7 +297,7 @@
     border-radius: 5px;
 }
 
-.story-pagination-bullet-active {
+.story-swiper-pagination-bullet-active {
     width: 10px;
     border-radius: 5px;
     background: #00999d !important;
@@ -282,17 +308,15 @@
     height: auto;
     width: 90%;
 }
-.story-box-wrapper{
-    display: flex;
-    /* overflow: hidden; */
-}
-.story-box{
+
+.story-box {
     border: #6a6a6a solid 1px;
     width: 80%;
     height: 160px;
     padding: 32px;
-    margin: 20px 20px 20px 20px ;
+    margin: 20px;
     border-radius: 20px;
+    display: inline-block;
 }
 
 .story-title {
@@ -303,11 +327,13 @@
 }
 
 .story-body {
-
     height: 100%;
-    white-space: nowrap;
+    padding:30px;
+    width: 90%;
     overflow: hidden;
     text-overflow: ellipsis;
+    word-break: normal;
+    
 }
 
 footer {
