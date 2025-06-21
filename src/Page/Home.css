@@ -1,3 +1,7 @@
+.home {
+    margin: auto;
+}
+
 .main {
     border-bottom: 4px solid #00999d;
     margin: 0 auto;
@@ -13,23 +17,26 @@
     width: 100%;
 }
 
-.main-swiper-pagination{
-    margin: auto;
+.main-swiper-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
 }
 
-.main-swiper-pagination-bullet {
-    background: gray !important;
+.main-swiper-pagination .swiper-pagination-bullet {
+    background-color: #e6e6e6;
+    background: black;
     width: 20px;
-    height: 5px;
-    transition: width .5s;
-    border-radius: 5px;
+    height: 20px;
+    transition: width 0.5s;
+    border-radius: 10px;
 }
 
-.main-swiper-pagination-bullet-active {
-    width: 10px;
-    border-radius: 5px;
-    background: #00999d !important;
-    border: 1px solid;
+.main-swiper-pagination .swiper-pagination-bullet-active {
+    width: 50px;
+    border-radius: 10px;
+    background: #00999d;
 }
 
 .notice-swiper-wrapper {
@@ -37,10 +44,12 @@
     display: flex;
     margin: 0 auto;
     align-items: center;
+    margin-bottom: 20px;
+    justify-content: space-between;
 }
 
 .notice-swiper {
-    width: 90%;
+    width: 100%;
     height: auto;
     margin: 0 auto;
 }
@@ -50,7 +59,6 @@
     height: 56px;
     display: flex;
     align-items: center;
-    float: left;
 }
 
 .notice-notice {
@@ -71,11 +79,12 @@
 }
 
 .handle-button {
-    width: fit-content;
+    width: 150px;
     height: 100%;
     display: flex;
     overflow: hidden;
     float: right;
+    justify-content: space-between;
 }
 
 .button-prev {
@@ -112,46 +121,52 @@
     margin: 0 auto;
     height: auto;
 }
-.invest-header{
-    font-size: 25px;
+
+.invest-header {
+    font-size: 30px;
+    margin: 30px 0;
 }
 
-.invest-card-swiper-pagination-bullet {
-    background: gray !important;
-    width: 20px;
-    background: transparent;
-    opacity: 1;
+.invest-card-swiper-pagination {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.invest-card-swiper-pagination .swiper-pagination-bullet {
+    background-color: #e1e1e1;
+    background: black;
+    width: 30px;
     transition: width .5s;
     border-radius: 5px;
     height: 5px;
 }
 
-.invest-card-swiper-pagination-bullet-active {
-    height: 5px;
-    width: 10px;
+.invest-card-swiper-pagination .swiper-pagination-bullet-active {
+    height: 7px;
+    width: 20px;
     border-radius: 5px;
-    background: #00999d !important;
-    border: 1px solid transparent;
+    background: #00999d;
 }
 
 .invest-card-swiper {
-    width: 90%;
+    width: 100%;
     height: fit-content;
     margin: 20px 0;
 }
 
 .invest-card-wrapper {
-    /* display: flex; */
-    flex-wrap: nowrap;
+    display: flex;
     width: 100%;
 }
 
 .invest-card {
     height: 160px;
-    background-color: gray;
+    background-color: #e1e1e1;
     border-radius: 10px;
     cursor: pointer;
-    width: 50%;
+    width: 100%;
     padding: 17px;
 }
 
@@ -163,7 +178,7 @@
 .invest-more {
     display: block;
     width: 100%;
-    margin: 0px auto;
+    margin: 30px auto;
     margin-bottom: 88px;
     border: 1px solid #00a8ad;
     border-radius: 100px;
@@ -246,7 +261,7 @@
 .status-summery-box {
     display: flex;
     width: 90%;
-    margin: 0 auto;
+    margin: 30px auto;
 }
 
 .status-box {
@@ -263,45 +278,53 @@
 
 .status-more {
     display: block;
-    max-width: 280px;
     width: 100%;
-    margin: auto;
+    margin: 30px auto;
+    margin-bottom: 88px;
     border: 1px solid #00a8ad;
     border-radius: 100px;
-    font-size: 16px;
     font-weight: 600;
     text-align: center;
     color: #00999d;
-    line-height: 40px;
+    max-width: 400px;
+    line-height: 60px;
+    font-size: 20px;
+    transition: all 0.1s ease;
     cursor: pointer;
 }
 
 .status-more:hover {
-    background-color: #00a8ad;
+    background-color: #00999d;
     color: white;
 }
 
-.cocktail-story{
+.cocktail-story {
     width: 80%;
     margin: 0 auto;
-    height: 500px;
+    height: auto;
+    background-image: linear-gradient(139deg, #fcfcfc, #fafafa);
 }
 
-.story-swiper-pagination-bullet {
-    background: gray !important;
-    width: 20px;
-    background: transparent;
-    opacity: 1;
+.story-swiper-pagination {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.story-swiper-pagination .swiper-pagination-bullet {
+    background-color: #e6e6e6;
+    background: black;
+    width: 30px;
     height: 5px;
     transition: width .5s;
     border-radius: 5px;
 }
 
-.story-swiper-pagination-bullet-active {
-    width: 10px;
+.story-swiper-pagination .swiper-pagination-bullet-active {
+    width: 20px;
     border-radius: 5px;
-    background: #00999d !important;
-    border: 1px solid transparent;
+    background: #00999d;
 }
 
 .story-swiper {
@@ -310,32 +333,54 @@
 }
 
 .story-box {
-    border: #6a6a6a solid 1px;
+    background-color: #ffffff;
     width: 80%;
-    height: 160px;
+    height: 250px;
     padding: 32px;
     margin: 20px;
-    border-radius: 20px;
-    display: inline-block;
+    border-radius: 8px;
+    font-size: 20px;
+    box-shadow: 0 6px 6px 0 rgba(225, 226, 227, 0.18);
+    padding: 32px;
 }
 
 .story-title {
+    font-weight: 600;
+    line-height: 1.56;
     height: auto;
-    white-space: nowrap;
     overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    letter-spacing: -0.2px;
+    color: #403f3e;
+    margin-bottom: 16px;
+}
+
+.story-body-wrapper {
+    margin-bottom: 32px;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 25px;
+    letter-spacing: -0.2px;
+    color: #626261;
+    height: 100px;
+    overflow: hidden;
+    -o-text-overflow: ellipsis;
     text-overflow: ellipsis;
 }
 
 .story-body {
     height: 100%;
-    padding:30px;
-    width: 90%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    word-break: normal;
-    
+    line-height: 25px;
+}
+.story-more{
+    float: right;
+    width: fit-content;
+    height: fit-content;
+    cursor: pointer;
 }
 
 footer {
     background: #e6e6e6 0% 0% no-repeat padding-box;
+
 }
