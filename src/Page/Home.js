@@ -17,17 +17,10 @@ import './Home.css'
 import axios from 'axios'
 import styled from "styled-components";
 import numeral from 'numeral';
+import dayjs from 'dayjs';
 
-export default function Home() {
-    const [notice, setNotice] = useState([]);
-    const [card, setCard] = useState([]);
-    const [status, setStatus] = useState();
-    const [story, setStory] = useState([]);
-    const numbers = () => {
-        numeral().format('0,0');
-    }
 
-    const Progress = styled.div`
+const Progress = styled.div`
     width: 95%;
     height: 5px;
     background-color: #e0e0e0;
@@ -35,14 +28,47 @@ export default function Home() {
     overflow: hidden;
 `;
 
-    const Dealt = styled.div`
+const Dealt = styled.div`
     height: 100%;
     background-color: #00999d;
     width: ${(props) => `${Math.floor((props.investAmount / props.amount) * 100)}%`};
 `;
-    const Status = styled.div`
-    font-size:15px;
+const Status = styled.div`
+    font-size:20px;
 `;
+const SummeryNum = styled.div`
+    font-size:40px;
+    color: #00999d;
+    font-weight: 500;
+`
+const BoxNum = styled.div`
+font-size:40px;
+color: black;
+font-weight:500;
+`
+
+
+export default function Home() {
+    const [notice, setNotice] = useState([]);
+    const [card, setCard] = useState([]);
+    const [status, setStatus] = useState();
+    const [story, setStory] = useState([]);
+
+    const numbers = (num) => {
+        return numeral(num).format('0,0');
+    }
+
+    const finNumbers = (num) => {
+        if (num >= 1e8) {
+            return `${numeral(num / 1e8).format('0.0')}억`;
+        } else if (num >= 1e4) {
+            return `${numeral(num / 1e4).format('0.0')}만`;
+        } else {
+            return numeral(num).format('0,0');
+        }
+    }
+
+    const date = (d) => { return dayjs(d).format('YYYY.MM.DD') };
 
     useEffect(() => {
         async function fetchAll() {
@@ -125,7 +151,7 @@ export default function Home() {
                             {notice.map((nt) => (
                                 <SwiperSlide className='notice-wrapper'>
                                     <div className='notice-notice'>공지</div>
-                                    <div className='notice-title'>{nt.title}{nt.updated_at}</div>
+                                    <div className='notice-title'>{nt.title}{date(nt.updated_at)}</div>
                                 </SwiperSlide>
                             ))}
                         </Swiper>
@@ -183,17 +209,17 @@ export default function Home() {
                         <div className='invest-more' onClick={() => { }}>더보기</div>
                     </div>
                     <div className='kakao-wrapper'>
-                        <div className='kakao-channel'>
+                        <div className='kakao-channel-wrapper'>
                             <div className='kakao-text'>
-                                <h2>리더를 위한 상품 알림</h2>
-                                <h2>칵테일펀딩 채널 추가</h2>
+                                <h2 style={{ fontSize: '40px', fontWeight:'600',margin:'0'}}>리더를 위한 상품 알림</h2>
+                                <h2 style={{margin:'0'}}>칵테일펀딩 채널 추가</h2>
                             </div>
                             <img className='kakao-img' src='https://v2.cocktailfunding.com/static/media/middle_banner_kakao.e74027ab.png' />
                         </div>
-                        <div className='invest-limit'>
+                        <div className='invest-limit-wrapper'>
                             <div className='invest-limit-text'>
-                                <h2>내 투자한도는?</h2>
-                                <h2>개인 소득적격 법인 투자자</h2>
+                                <h2 style={{ fontSize: '40px', fontWeight:'600',margin:'0'}}>내 투자한도는?</h2>
+                                <h2 style={{margin:'0'}}>개인 소득적격 법인 투자자</h2>
                             </div>
                             <img className='invest-limit-img' src='https://v2.cocktailfunding.com/static/media/middle_banner_limit.d461ed2f.png' />
                         </div>
@@ -206,31 +232,40 @@ export default function Home() {
                     {status && (
                         <div className='status-header' style={{ fontSize: '30px', margin: '30px 0' }}>칵테일 펀딩 투자 현황 {status.baseDate}
                             <div className='status-summery'>
-                                칵테일펀딩을 통해{status.countUser}의 회원이 <br />{status.investAmount}을 투자하여 <br />{status.investInterest}의 수익을 경험하셨습니다.
+                                칵테일펀딩을 통해<SummeryNum>{numbers(status.countUser)}명</SummeryNum>의 회원이 <br /><SummeryNum>{finNumbers(status.investAmount)}원</SummeryNum>을 투자하여 <br /><SummeryNum>{finNumbers(status.investInterest)}원</SummeryNum>의 수익을 경험하셨습니다.
                                 <div className='status-summery-box'>
                                     <div className='status-box'>
                                         <Status>
-                                            누적 대출액<br />
+                                            누적 대출액
                                         </Status>
-                                        {numbers(status.loanAmount)};
+                                        <BoxNum>
+                                            {finNumbers(status.loanAmount)}원
+                                        </BoxNum>
                                     </div>
                                     <div className='status-box'>
                                         <Status>
-                                            총 상환금액<br />
+                                            총 상환금액
                                         </Status>
-                                        {numeral(status.loanBalance).format('0,0')}
+                                        <BoxNum>
+                                            {finNumbers(status.loanBalance)}원
+                                        </BoxNum>
                                     </div>
                                     <div className='status-box'>
                                         <Status>
-                                            대출 잔액<br />
+                                            대출 잔액
                                         </Status>
-                                        {numeral(status.totalReturnAmount).format('0,0')}
+                                        <BoxNum>
+                                            {finNumbers(status.totalReturnAmount)}원
+                                        </BoxNum>
                                     </div>
                                     <div className='status-box'>
                                         <Status>
-                                            평균 수익률<br />
+                                            평균 수익률
                                         </Status>
-                                        {numeral(status.avgInterestRate).format('0,0')}
+                                        <BoxNum>
+                                            {numeral(status.avgInterestRate).format('0.00')}
+                                        </BoxNum>
+                                        %
                                     </div>
                                 </div>
                             </div>
