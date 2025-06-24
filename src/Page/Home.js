@@ -15,12 +15,34 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import './Home.css'
 import axios from 'axios'
+import styled from "styled-components";
+import numeral from 'numeral';
 
 export default function Home() {
     const [notice, setNotice] = useState([]);
     const [card, setCard] = useState([]);
     const [status, setStatus] = useState();
     const [story, setStory] = useState([]);
+    const numbers = () => {
+        numeral().format('0,0');
+    }
+
+    const Progress = styled.div`
+    width: 95%;
+    height: 5px;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    overflow: hidden;
+`;
+
+    const Dealt = styled.div`
+    height: 100%;
+    background-color: #00999d;
+    width: ${(props) => `${Math.floor((props.investAmount / props.amount) * 100)}%`};
+`;
+    const Status = styled.div`
+    font-size:15px;
+`;
 
     useEffect(() => {
         async function fetchAll() {
@@ -139,7 +161,21 @@ export default function Home() {
                             >
                                 {card.map((cd) => (
                                     <SwiperSlide className='invest-card-wrapper'>
-                                        <div className='invest-card'>{cd.amount}{cd.id}{cd.name}</div>
+                                        <div className='invest-card-thumbnail'>
+                                            <div className='invest-card'>
+                                                <div>{cd.status}</div>
+                                                {cd.product_tag}
+                                            </div>
+                                        </div>
+                                        <div>{cd.name}</div>
+                                        <div>{cd.title}</div>
+                                        <div>
+                                            <div>{cd.interest_rate} | {cd.term} | {cd.investment_category_name}</div>
+                                            {cd.opened_at}
+                                        </div>
+                                        <Progress className='progress-bar'>
+                                            <Dealt amount={cd.amount} investAmount={cd.invest_amount} />
+                                        </Progress>
                                     </SwiperSlide>
                                 ))}
                             </Swiper>
@@ -173,20 +209,28 @@ export default function Home() {
                                 칵테일펀딩을 통해{status.countUser}의 회원이 <br />{status.investAmount}을 투자하여 <br />{status.investInterest}의 수익을 경험하셨습니다.
                                 <div className='status-summery-box'>
                                     <div className='status-box'>
-                                        누적 대출액<br />
-                                        {status.loanAmount}
+                                        <Status>
+                                            누적 대출액<br />
+                                        </Status>
+                                        {numbers(status.loanAmount)};
                                     </div>
                                     <div className='status-box'>
-                                        총 상환금액<br />
-                                        {status.loanBalance}
+                                        <Status>
+                                            총 상환금액<br />
+                                        </Status>
+                                        {numeral(status.loanBalance).format('0,0')}
                                     </div>
                                     <div className='status-box'>
-                                        대출 잔액<br />
-                                        {status.totalReturnAmount}
+                                        <Status>
+                                            대출 잔액<br />
+                                        </Status>
+                                        {numeral(status.totalReturnAmount).format('0,0')}
                                     </div>
                                     <div className='status-box'>
-                                        평균 수익률<br />
-                                        {status.avgInterestRate}
+                                        <Status>
+                                            평균 수익률<br />
+                                        </Status>
+                                        {numeral(status.avgInterestRate).format('0,0')}
                                     </div>
                                 </div>
                             </div>
