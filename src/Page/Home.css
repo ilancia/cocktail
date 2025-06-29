@@ -259,11 +259,11 @@
 }
 
 .status-summery {
+    display: flex;
     font-size: 30px;
     margin: 0 auto 25px;
-    text-align: center;
-    word-break: break-word;
-    word-wrap: break-word;
+    justify-content: center;
+    align-items: center;
     color: #6a6a6a;
     line-height: 1.5;
 }

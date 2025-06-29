@@ -40,12 +40,13 @@ const SummeryNum = styled.div`
     font-size:40px;
     color: #00999d;
     font-weight: 500;
-`
+`;
 const BoxNum = styled.div`
 font-size:40px;
 color: black;
 font-weight:500;
-`
+`;
+
 
 
 export default function Home() {
@@ -211,15 +212,15 @@ export default function Home() {
                     <div className='kakao-wrapper'>
                         <div className='kakao-channel-wrapper'>
                             <div className='kakao-text'>
-                                <h2 style={{ fontSize: '40px', fontWeight:'600',margin:'0'}}>리더를 위한 상품 알림</h2>
-                                <h2 style={{margin:'0'}}>칵테일펀딩 채널 추가</h2>
+                                <h2 style={{ fontSize: '40px', fontWeight: '600', margin: '0' }}>리더를 위한 상품 알림</h2>
+                                <h2 style={{ margin: '0' }}>칵테일펀딩 채널 추가</h2>
                             </div>
                             <img className='kakao-img' src='https://v2.cocktailfunding.com/static/media/middle_banner_kakao.e74027ab.png' />
                         </div>
                         <div className='invest-limit-wrapper'>
                             <div className='invest-limit-text'>
-                                <h2 style={{ fontSize: '40px', fontWeight:'600',margin:'0'}}>내 투자한도는?</h2>
-                                <h2 style={{margin:'0'}}>개인 소득적격 법인 투자자</h2>
+                                <h2 style={{ fontSize: '40px', fontWeight: '600', margin: '0' }}>내 투자한도는?</h2>
+                                <h2 style={{ margin: '0' }}>개인 소득적격 법인 투자자</h2>
                             </div>
                             <img className='invest-limit-img' src='https://v2.cocktailfunding.com/static/media/middle_banner_limit.d461ed2f.png' />
                         </div>
@@ -232,41 +233,43 @@ export default function Home() {
                     {status && (
                         <div className='status-header' style={{ fontSize: '30px', margin: '30px 0' }}>칵테일 펀딩 투자 현황 {status.baseDate}
                             <div className='status-summery'>
-                                칵테일펀딩을 통해<SummeryNum>{numbers(status.countUser)}명</SummeryNum>의 회원이 <br /><SummeryNum>{finNumbers(status.investAmount)}원</SummeryNum>을 투자하여 <br /><SummeryNum>{finNumbers(status.investInterest)}원</SummeryNum>의 수익을 경험하셨습니다.
-                                <div className='status-summery-box'>
-                                    <div className='status-box'>
-                                        <Status>
-                                            누적 대출액
-                                        </Status>
-                                        <BoxNum>
-                                            {finNumbers(status.loanAmount)}원
-                                        </BoxNum>
-                                    </div>
-                                    <div className='status-box'>
-                                        <Status>
-                                            총 상환금액
-                                        </Status>
-                                        <BoxNum>
-                                            {finNumbers(status.loanBalance)}원
-                                        </BoxNum>
-                                    </div>
-                                    <div className='status-box'>
-                                        <Status>
-                                            대출 잔액
-                                        </Status>
-                                        <BoxNum>
-                                            {finNumbers(status.totalReturnAmount)}원
-                                        </BoxNum>
-                                    </div>
-                                    <div className='status-box'>
-                                        <Status>
-                                            평균 수익률
-                                        </Status>
-                                        <BoxNum>
-                                            {numeral(status.avgInterestRate).format('0.00')}
-                                        </BoxNum>
-                                        %
-                                    </div>
+                            칵테일펀딩을 통해<SummeryNum>{numbers(status.countUser)}명</SummeryNum>의 회원이
+                                <SummeryNum>{finNumbers(status.investAmount)}원</SummeryNum>을 투자하여
+                                <SummeryNum>{finNumbers(status.investInterest)}원</SummeryNum>의 수익을 경험하셨습니다.
+                            </div>
+                            <div className='status-summery-box'>
+                                <div className='status-box'>
+                                    <Status>
+                                        누적 대출액
+                                    </Status>
+                                    <BoxNum>
+                                        {finNumbers(status.loanAmount)}원
+                                    </BoxNum>
+                                </div>
+                                <div className='status-box'>
+                                    <Status>
+                                        총 상환금액
+                                    </Status>
+                                    <BoxNum>
+                                        {finNumbers(status.loanBalance)}원
+                                    </BoxNum>
+                                </div>
+                                <div className='status-box'>
+                                    <Status>
+                                        대출 잔액
+                                    </Status>
+                                    <BoxNum>
+                                        {finNumbers(status.totalReturnAmount)}원
+                                    </BoxNum>
+                                </div>
+                                <div className='status-box'>
+                                    <Status>
+                                        평균 수익률
+                                    </Status>
+                                    <BoxNum>
+                                        {numeral(status.avgInterestRate).format('0.00')}
+                                    </BoxNum>
+                                    %
                                 </div>
                             </div>
                         </div>)}
