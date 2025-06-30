@@ -18,7 +18,8 @@ import axios from 'axios'
 import styled from "styled-components";
 import numeral from 'numeral';
 import dayjs from 'dayjs';
-
+import { ToastContainer,toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Progress = styled.div`
     width: 95%;
@@ -42,10 +43,24 @@ const SummeryNum = styled.div`
     font-weight: 500;
 `;
 const BoxNum = styled.div`
-font-size:40px;
-color: black;
-font-weight:500;
+    font-size:40px;
+    color: black;
+    font-weight:500;
 `;
+const FooterLinks = styled.div`
+    width:fit-content;
+    cursor: pointer;
+    padding-bottom: 24px;
+  &:hover {
+    color: #24231f;
+    transition: all 0.34s ease-in;
+`;
+const FooterCustomer = styled.div`
+    color: #6a6a6a;
+    font: normal normal 16px / 18px NanumSquare;
+    padding-bottom: 16px;
+`;
+
 
 
 
@@ -54,6 +69,7 @@ export default function Home() {
     const [card, setCard] = useState([]);
     const [status, setStatus] = useState();
     const [story, setStory] = useState([]);
+    const [popup, setPopup] = useState();
 
     const numbers = (num) => {
         return numeral(num).format('0,0');
@@ -80,11 +96,14 @@ export default function Home() {
                 const cardRes = await axios.get(`${process.env.REACT_APP_SERVER_URL}/product/list?limit=6&q=1748095980883`);
                 setCard(cardRes.data.body.products);
 
-                const statusRes = await axios.get(`${process.env.REACT_APP_SERVER_URL_BUDGET}/loan/main/report?q=1749982044781`);
+                const statusRes = await axios.get(`${process.env.REACT_APP_SERVER_URL_WR}/loan/main/report?q=1749982044781`);
                 setStatus(statusRes.data);
 
                 const storyRes = await axios.get(`${process.env.REACT_APP_SERVER_URL}/common/mediaNotice?q=1749829498644`);
                 setStory(storyRes.data.body);
+
+                const popupRes = await axios.get(`${process.env.REACT_APP_SERVER_URL_WR}/admin/base/user/notice?q=1751297412231`);
+                setPopup(popupRes.data);
             } catch (e) {
                 console.error(e);
             }
@@ -92,7 +111,7 @@ export default function Home() {
 
         fetchAll();
     }, []);
-
+    
     return (
         <div className='home'>
             <section className='main'>
@@ -192,6 +211,7 @@ export default function Home() {
                                             <div className='invest-card'>
                                                 <div>{cd.status}</div>
                                                 {cd.product_tag}
+                                                <img src='../IMG_TOWER.png' alt='card-img' height={'70%'} width={'15%'}></img>
                                             </div>
                                         </div>
                                         <div>{cd.name}</div>
@@ -233,7 +253,7 @@ export default function Home() {
                     {status && (
                         <div className='status-header' style={{ fontSize: '30px', margin: '30px 0' }}>칵테일 펀딩 투자 현황 {status.baseDate}
                             <div className='status-summery'>
-                            칵테일펀딩을 통해<SummeryNum>{numbers(status.countUser)}명</SummeryNum>의 회원이
+                                칵테일펀딩을 통해<SummeryNum>{numbers(status.countUser)}명</SummeryNum>의 회원이
                                 <SummeryNum>{finNumbers(status.investAmount)}원</SummeryNum>을 투자하여
                                 <SummeryNum>{finNumbers(status.investInterest)}원</SummeryNum>의 수익을 경험하셨습니다.
                             </div>
@@ -309,10 +329,27 @@ export default function Home() {
                 </div>
             </section>
 
-            <footer>
+            <footer className='footer'>
                 <div className='footer-wrapper'>
                     <div className='footer-first'>
-                        <a></a>
+                        <div className='footer-infos-logo'>
+                            <img src='' />
+                        </div>
+                        <div className='footer-links-div'>
+                            <FooterLinks>서비스이용약관</FooterLinks>
+                            <FooterLinks>개인정보취급방침</FooterLinks>
+                            <FooterLinks>온라인연계투자약관</FooterLinks>
+                            <FooterLinks>온라인연계대출약관</FooterLinks>
+                            <FooterLinks>전자금융거래이용약관</FooterLinks>
+                            <FooterLinks>고객권리안내문</FooterLinks>
+                            <FooterLinks>신용정보활용체제</FooterLinks>
+                        </div>
+                        <div className='footer-customer-center'>
+                            <FooterCustomer></FooterCustomer>
+                            <FooterCustomer></FooterCustomer>
+                            <FooterCustomer></FooterCustomer>
+                            <FooterCustomer></FooterCustomer>
+                        </div>
                     </div>
                     <div className='footer-second'></div>
                 </div>

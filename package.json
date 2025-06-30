@@ -16,7 +16,9 @@
     "react-dom": "^19.0.0",
     "react-router-dom": "^6.30.0",
     "react-scripts": "5.0.1",
+    "react-toastify": "^11.0.5",
     "styled-components": "^6.1.19",
+    "sweetalert2": "^11.22.2",
     "swiper": "^11.2.8",
     "web-vitals": "^2.1.4"
   },

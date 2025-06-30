@@ -172,6 +172,10 @@
     padding: 17px;
 }
 
+.card-img {
+    float: right;
+}
+
 .invest-more:hover {
     background-color: #00999d;
     color: white;
@@ -385,14 +389,38 @@
     height: 100%;
     line-height: 25px;
 }
-.story-more{
+
+.story-more {
     float: right;
     width: fit-content;
     height: fit-content;
     cursor: pointer;
 }
 
-footer {
+.footer {
     background: #e6e6e6 0% 0% no-repeat padding-box;
+}
 
+.footer-wrapper {
+    position: relative;
+    margin: 0 auto;
+}
+
+.footer-first {
+    display: inline-block;
+    width: 37%;
+    vertical-align: top;
+    padding-top: 60px;
+    margin-bottom: 30px;
+}
+
+.footer-infos-logo {}
+
+.footer-links-div {
+    color: #6a6a6a;
+    font: normal normal 600 16px / 28px NanumSquare;
+    padding-bottom: 48px;
+}
+.footer-customer-center{
+    
 }
