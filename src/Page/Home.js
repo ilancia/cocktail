@@ -18,7 +18,7 @@ import axios from 'axios'
 import styled from "styled-components";
 import numeral from 'numeral';
 import dayjs from 'dayjs';
-import { ToastContainer,toast } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const Progress = styled.div`
@@ -55,14 +55,17 @@ const FooterLinks = styled.div`
     color: #24231f;
     transition: all 0.34s ease-in;
 `;
-const FooterCustomer = styled.div`
+const Label = styled.div`
     color: #6a6a6a;
     font: normal normal 16px / 18px NanumSquare;
     padding-bottom: 16px;
 `;
-
-
-
+const FooterInfo = styled.div`
+    display:inline-block;
+    color:#6a6a6a;
+    font-weight: 600;
+    margin-right: 6px;
+`
 
 export default function Home() {
     const [notice, setNotice] = useState([]);
@@ -111,7 +114,7 @@ export default function Home() {
 
         fetchAll();
     }, []);
-    
+
     return (
         <div className='home'>
             <section className='main'>
@@ -345,13 +348,76 @@ export default function Home() {
                             <FooterLinks>신용정보활용체제</FooterLinks>
                         </div>
                         <div className='footer-customer-center'>
-                            <FooterCustomer></FooterCustomer>
-                            <FooterCustomer></FooterCustomer>
-                            <FooterCustomer></FooterCustomer>
-                            <FooterCustomer></FooterCustomer>
+                            <Label><b style={{ fontSize: '30px' }}>고객센터</b></Label>
+                            <Label>유선 상담: 평일 09:30 ~ 18:30</Label>
+                            <a style={{ color: '#6a6a6a', fontSize: '30px' }}>02-785-2016</a>
+                            <Label>①대출 ②투자상품 ③시스템 ④기타</Label>
+                            <div className='kakao'>
+                                <span style={{ color: '#6a6a6a', fontSize: '30px', fontWeight: '600' }}>카카오톡채널</span>
+                                <img src='../img_footer_kakao.png' />
+                                <b style={{ color: '#6a6a6a', fontSize: '30px', fontWeight: '600' }}>칵테일펀딩</b>
+                            </div>
+                            <Label>평일 10:00 ~ 18:00</Label>
+                            <div className='email'>contact@cocktailfd.com</div>
+                        </div>
+                        <div className='footer-dark-banners'>
                         </div>
                     </div>
-                    <div className='footer-second'></div>
+                    <div className='footer-second'>
+                        <div className='footer-infos'>
+
+                            <div className='footer-infos-left'>
+                                <div className='footer-loan-name'>(주)트리거파트너스</div>
+                                <div className='footer-infos-inline'>
+                                    <FooterInfo>대표</FooterInfo>김운하
+                                </div>
+                                <div className='footer-infos-bar'>|</div>
+                                <div className='footer-infos-inline'>
+                                    <FooterInfo>사업자등록번호</FooterInfo>146-86-00732
+                                </div>
+                                <div className='footer-infos-bar'>|</div>
+                                <div className='footer-infos-inline'>
+                                    <FooterInfo>온라인투자연계금융업 등록번호</FooterInfo>2024-24
+                                </div>
+                                <div className='footer-infos-bar'>|</div>
+                                <div className='footer-infos-inline'>
+                                    <FooterInfo>개인정보 보호 책임자</FooterInfo>김운하
+                                </div>
+                                <div className='footer-infos-inline'>
+                                    <FooterInfo>T</FooterInfo>02-785-2016
+                                </div>
+                                <div className='footer-infos-bar'>|</div>
+                                <div className='footer-infos-inline'>
+                                    <FooterInfo>F</FooterInfo>070-8282-6888
+                                </div>
+                                <div className='footer-infos-bar'>|</div>
+                                <div className='footer-infos-inline'>
+                                    <FooterInfo>E</FooterInfo>contact@cocktailfd.com
+                                </div>
+                                <div className='footer-infos-bar'>|</div>
+                                <div className='footer-infos-inline'>
+                                    <FooterInfo>A</FooterInfo>서울특별시 강남구 봉은사로63길 11, 2층(삼성동, 명화빌딩)
+                                </div>
+                            </div>
+                            <div className='footer-infos-right'>
+                                <div className='footer-loan-warn'>
+                                    대출금리 : 연17%이내, 연체 이자율 : 약정금리 +3% (법정최고금리 20%이내), 채무의 조기상환수수료율은 최대 1%이내(기간별 차등적용)이며, 법무비 플랫폼이용료 등의 부대비용은 추가될 수 있습니다. 중개수수료를 요구하거나 받는 행위는 불법입니다. 과도한 빚은 당신에게 큰 불행을 안겨 줄 수 있습니다. 대출 시 귀하의 신용등급이 하락할 수 있습니다.
+                                    <br />
+                                    <span style={{ fontWeight: '600' }}>
+                                        트리거파트너스는 투자원금과 수익을 보장하지 않으며, 투자손실에 대한 책임은 모두 투자자에게 있습니다.
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr className='footer-hr'></hr>
+                <div className='footer-last'>
+                    <div className='footer-copyright'>
+                        Copyright 2021.
+                        <b style={{ font: 'normal normal 16px / 19px NanumSquare' }}>(주)트리거파트너스</b>
+                        All Rights Reserved.
+                    </div>
                 </div>
             </footer>
 

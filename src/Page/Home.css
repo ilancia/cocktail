@@ -381,7 +381,6 @@
     color: #626261;
     height: 100px;
     overflow: hidden;
-    -o-text-overflow: ellipsis;
     text-overflow: ellipsis;
 }
 
@@ -402,6 +401,8 @@
 }
 
 .footer-wrapper {
+    display: flex;
+    width: 90%;
     position: relative;
     margin: 0 auto;
 }
@@ -414,13 +415,98 @@
     margin-bottom: 30px;
 }
 
-.footer-infos-logo {}
+/* .footer-infos-logo {} */
 
 .footer-links-div {
     color: #6a6a6a;
     font: normal normal 600 16px / 28px NanumSquare;
     padding-bottom: 48px;
 }
-.footer-customer-center{
-    
+
+.email {
+    color: #6a6a6a;
+    font: normal normal 20px / 24px Montserrat;
+    padding-bottom: 12px;
+    font-weight: 600;
+}
+
+.footer-second {
+    display: inline-block;
+    width: 37%;
+    vertical-align: top;
+    padding-top: 60px;
+    margin-bottom: 30px;
+}
+
+.footer-infos {
+    width: 100%;
+    padding: 32px 40px;
+    font-size: 14px;
+    color: #64676c;
+}
+
+.footer-loan-name {
+    margin-bottom: 10px;
+    font: normal normal 600 18px / 28px NanumSquare;
+    color: #6a6a6a;
+}
+
+.footer-infos-left {
+    width: 100%;
+    position: relative;
+    margin: 0;
+    display: inline-block;
+    font-size: 16px;
+    color: #e6e6e6;
+    padding: 32px 40px;
+}
+
+.footer-infos-inline {
+    display: inline-block;
+    margin-bottom: 1px;
+    font: normal normal 16px / 26px NanumSquare;
+    color: #45484e;
+}
+
+.footer-infos-bar {
+    display: inline-block;
+    color: #9a9a9a;
+    margin: 0 3px;
+}
+
+.footer-infos-right {
+    width: 100%;
+    padding: 32px 40px;
+    font-size: 14px;
+    color: #64676c;
+}
+
+.footer-loan-warn {
+    margin-bottom: 36px;
+    color: #6A6A6A;
+    font: normal normal 200 18px / 32px NanumSquare;
+}
+
+.footer-hr {
+    width: 100%;
+    border-top: 2px solid #bbbbbb;
+    margin: 0;
+}
+
+/* .footer-customer-center {} */
+.footer-last {
+    display: block;
+    font-size: 16px;
+    padding-top: 21px;
+    padding-bottom: 21px;
+    width: 100%;
+    position: relative;
+    margin: 0 auto;
+    color: #45484e;
+}
+
+.footer-copyright {
+    color: #6a6a6a;
+    font: normal normal 16px / 19px Montserrat;
+    display: inline;
 }
