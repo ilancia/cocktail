@@ -265,7 +265,7 @@ export default function Home() {
             <section className='invest-status'>
                 {status && (
                     <div className='status-wrapper'>
-                        <div className='status-header' style={{ fontSize: '30px', margin: '30px 0' }}>칵테일 펀딩 투자 현황
+                        <div className='status-header' style={{ fontSize: '30px'}}>칵테일 펀딩 투자 현황
                             <div className='status-date'>
                                 {datekor(status.baseDate)}
                             </div>
@@ -316,14 +316,14 @@ export default function Home() {
                                 %
                             </div>
                         </div>
+                        <div className='status-info'></div>
+                        <div className='status-more'>공시자료 상세보기</div>
                     </div>)}
-                <div className='status-info'></div>
-                <div className='status-more'>공시자료 상세보기</div>
             </section>
 
             <section className='cocktail-story'>
-                <div style={{ fontSize: '30px', margin: '30px 0' }}>칵테일 펀딩 이야기</div>
                 <div className='story-wrapper'>
+                    <div style={{ fontSize: '30px', margin: '30px 0' }}>칵테일 펀딩 이야기</div>
                     <div className='story-swiper-pagination'></div>
                     <Swiper
                         modules={[Pagination]}
@@ -435,7 +435,7 @@ export default function Home() {
                 <div className='footer-last'>
                     <div className='footer-copyright'>
                         Copyright 2021.
-                        <b style={{ font: 'normal normal 16px / 19px NanumSquare' }}>(주)트리거파트너스</b>
+                        <b style={{ fontSize: '19px', fontWeight: '400' }}>(주)트리거파트너스</b>
                         All Rights Reserved.
                     </div>
                 </div>

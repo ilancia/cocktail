@@ -297,9 +297,14 @@ body {
 }
 
 .invest-status {
-    border-bottom: 4px solid #00999d;
     margin: 0 auto;
+    width: 100%;
+    background: #fff;
+}
+.status-wrapper{
     width: 80%;
+    margin: 0 auto;
+    padding: 50px 0;
 }
 
 .status-header {
@@ -315,12 +320,15 @@ body {
 
 .status-summery {
     font-size: 30px;
-    margin: 0 auto 25px;
+    margin: 50px auto;
     color: #6a6a6a;
     line-height: 1.5;
+
 }
 
 .status-summery-text {
+    font-weight: 400;
+    font-size: 35px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -337,13 +345,14 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    border: #6a6a6a solid 1px;
+    border: #e6e6e6 solid 1px;
     width: 24%;
-    height: 160px;
+    height: 230px;
     margin: 0 auto;
-    border-radius: 5px;
+    border-radius: 8px;
     flex-direction: column;
     color: black;
+    
 }
 
 .status-more {
@@ -369,10 +378,13 @@ body {
 }
 
 .cocktail-story {
-    width: 80%;
-    margin: 0 auto;
+    width: 100%;
     height: auto;
     background-image: linear-gradient(139deg, #fcfcfc, #fafafa);
+}
+.story-wrapper{
+    width: 80%;
+    margin: auto;
 }
 
 .story-swiper-pagination {
@@ -399,7 +411,7 @@ body {
 
 .story-swiper {
     height: auto;
-    width: 90%;
+    width: 100%;
 }
 
 .story-box {
@@ -456,7 +468,7 @@ body {
 
 .footer-wrapper {
     display: flex;
-    width: 90%;
+    width: 80%;
     position: relative;
     margin: 0 auto;
 }
@@ -550,17 +562,16 @@ body {
 /* .footer-customer-center {} */
 .footer-last {
     display: block;
-    font-size: 16px;
+    font-size: 19px;
     padding-top: 21px;
     padding-bottom: 21px;
     width: 100%;
-    position: relative;
-    margin: 0 auto;
     color: #45484e;
 }
 
 .footer-copyright {
     color: #6a6a6a;
-    font: normal normal 16px / 19px Montserrat;
+    font-weight: 500;
     display: inline;
+    margin-left: auto;
 }
