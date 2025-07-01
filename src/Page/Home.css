@@ -1,3 +1,7 @@
+body {
+    padding-top: 75px;
+}
+
 .home {
     margin: auto;
 }
@@ -76,6 +80,14 @@
     font-size: 25px;
     width: 45%;
     height: fit-content;
+    display: flex;
+    align-items: center;
+}
+
+.notice-title-date {
+    font-size: 20px;
+    color: #6a6a6a;
+    margin-left: 30px;
 }
 
 .handle-button {
@@ -175,6 +187,34 @@
 .card-img {
     float: right;
 }
+.card-name{
+    padding-left: 3px;
+    color: #24231f;
+    margin: 3px 0;
+}
+.card-title{
+    padding-left: 3px;
+    color: #24231f;
+    font-size: 20px;
+    font-weight: 580;
+    margin: 3px 0;
+}
+
+.card-info {
+    padding-left: 3px;
+    padding-right: 3px;
+    margin-top: 20px;
+    font-size: 17px;
+    color: #6a6a6a;
+    display: flex;
+    justify-content: space-between;
+}
+
+.card-date {
+    padding-top: 3px;
+    font-size: 15px;
+    float: right;
+}
 
 .invest-more:hover {
     background-color: #00999d;
@@ -262,14 +302,28 @@
     width: 80%;
 }
 
-.status-summery {
+.status-header {
     display: flex;
+    align-items: end;
+}
+
+.status-date {
+    color: #6a6a6a;
+    font-size: 20px;
+    margin-left: 15px;
+}
+
+.status-summery {
     font-size: 30px;
     margin: 0 auto 25px;
-    justify-content: center;
-    align-items: center;
     color: #6a6a6a;
     line-height: 1.5;
+}
+
+.status-summery-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .status-summery-box {

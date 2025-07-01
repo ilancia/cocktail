@@ -18,11 +18,12 @@ import axios from 'axios'
 import styled from "styled-components";
 import numeral from 'numeral';
 import dayjs from 'dayjs';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import Modal from 'react-modal';
+
+Modal.setAppElement('#root');
 
 const Progress = styled.div`
-    width: 95%;
+    width: 100%;
     height: 5px;
     background-color: #e0e0e0;
     border-radius: 5px;
@@ -73,6 +74,7 @@ export default function Home() {
     const [status, setStatus] = useState();
     const [story, setStory] = useState([]);
     const [popup, setPopup] = useState();
+    const [isOpen, setIsOpen] = useState(false);
 
     const numbers = (num) => {
         return numeral(num).format('0,0');
@@ -88,8 +90,8 @@ export default function Home() {
         }
     }
 
-    const date = (d) => { return dayjs(d).format('YYYY.MM.DD') };
-
+    const date = (d) => { return dayjs(d).format('YYYY-MM-DD') };
+    const datekor = (d) => { return dayjs(d).format('YYYY년 MM월 DD일 기준') };
     useEffect(() => {
         async function fetchAll() {
             try {
@@ -107,12 +109,15 @@ export default function Home() {
 
                 const popupRes = await axios.get(`${process.env.REACT_APP_SERVER_URL_WR}/admin/base/user/notice?q=1751297412231`);
                 setPopup(popupRes.data);
+
             } catch (e) {
                 console.error(e);
             }
         }
 
         fetchAll();
+
+        setIsOpen(true);
     }, []);
 
     return (
@@ -174,7 +179,11 @@ export default function Home() {
                             {notice.map((nt) => (
                                 <SwiperSlide className='notice-wrapper'>
                                     <div className='notice-notice'>공지</div>
-                                    <div className='notice-title'>{nt.title}{date(nt.updated_at)}</div>
+                                    <div className='notice-title'>{nt.title}
+                                        <div className='notice-title-date'>
+                                            {date(nt.updated_at)}
+                                        </div>
+                                    </div>
                                 </SwiperSlide>
                             ))}
                         </Swiper>
@@ -217,11 +226,13 @@ export default function Home() {
                                                 <img src='../IMG_TOWER.png' alt='card-img' height={'70%'} width={'15%'}></img>
                                             </div>
                                         </div>
-                                        <div>{cd.name}</div>
-                                        <div>{cd.title}</div>
-                                        <div>
-                                            <div>{cd.interest_rate} | {cd.term} | {cd.investment_category_name}</div>
-                                            {cd.opened_at}
+                                        <div className='card-name'>{cd.name}</div>
+                                        <div className='card-title'>{cd.title}</div>
+                                        <div className='card-info'>
+                                            <div className='card-item'>{cd.interest_rate} | {cd.term} | {cd.investment_category_name}</div>
+                                            <div className='card-date'>
+                                                {dayjs(cd.opened_at).format('YYYY.MM.DD')}
+                                            </div>
                                         </div>
                                         <Progress className='progress-bar'>
                                             <Dealt amount={cd.amount} investAmount={cd.invest_amount} />
@@ -252,53 +263,62 @@ export default function Home() {
             </section >
 
             <section className='invest-status'>
-                <div className='status-wrapper'>
-                    {status && (
-                        <div className='status-header' style={{ fontSize: '30px', margin: '30px 0' }}>칵테일 펀딩 투자 현황 {status.baseDate}
-                            <div className='status-summery'>
+                {status && (
+                    <div className='status-wrapper'>
+                        <div className='status-header' style={{ fontSize: '30px', margin: '30px 0' }}>칵테일 펀딩 투자 현황
+                            <div className='status-date'>
+                                {datekor(status.baseDate)}
+                            </div>
+                        </div>
+                        <div className='status-summery'>
+                            <div className='status-summery-text'>
                                 칵테일펀딩을 통해<SummeryNum>{numbers(status.countUser)}명</SummeryNum>의 회원이
-                                <SummeryNum>{finNumbers(status.investAmount)}원</SummeryNum>을 투자하여
-                                <SummeryNum>{finNumbers(status.investInterest)}원</SummeryNum>의 수익을 경험하셨습니다.
                             </div>
-                            <div className='status-summery-box'>
-                                <div className='status-box'>
-                                    <Status>
-                                        누적 대출액
-                                    </Status>
-                                    <BoxNum>
-                                        {finNumbers(status.loanAmount)}원
-                                    </BoxNum>
-                                </div>
-                                <div className='status-box'>
-                                    <Status>
-                                        총 상환금액
-                                    </Status>
-                                    <BoxNum>
-                                        {finNumbers(status.loanBalance)}원
-                                    </BoxNum>
-                                </div>
-                                <div className='status-box'>
-                                    <Status>
-                                        대출 잔액
-                                    </Status>
-                                    <BoxNum>
-                                        {finNumbers(status.totalReturnAmount)}원
-                                    </BoxNum>
-                                </div>
-                                <div className='status-box'>
-                                    <Status>
-                                        평균 수익률
-                                    </Status>
-                                    <BoxNum>
-                                        {numeral(status.avgInterestRate).format('0.00')}
-                                    </BoxNum>
-                                    %
-                                </div>
+                            <div className='status-summery-text'>
+                                <SummeryNum>{numbers(status.investAmount)}원</SummeryNum>을 투자하여
                             </div>
-                        </div>)}
-                    <div className='status-info'></div>
-                    <div className='status-more'>공시자료 상세보기</div>
-                </div>
+                            <div className='status-summery-text'>
+                                <SummeryNum>{numbers(status.investInterest)}원</SummeryNum>의 수익을 경험하셨습니다.
+                            </div>
+                        </div>
+                        <div className='status-summery-box'>
+                            <div className='status-box'>
+                                <Status>
+                                    누적 대출액
+                                </Status>
+                                <BoxNum>
+                                    {finNumbers(status.loanAmount)}원
+                                </BoxNum>
+                            </div>
+                            <div className='status-box'>
+                                <Status>
+                                    총 상환금액
+                                </Status>
+                                <BoxNum>
+                                    {finNumbers(status.loanBalance)}원
+                                </BoxNum>
+                            </div>
+                            <div className='status-box'>
+                                <Status>
+                                    대출 잔액
+                                </Status>
+                                <BoxNum>
+                                    {finNumbers(status.totalReturnAmount)}원
+                                </BoxNum>
+                            </div>
+                            <div className='status-box'>
+                                <Status>
+                                    평균 수익률
+                                </Status>
+                                <BoxNum>
+                                    {numeral(status.avgInterestRate).format('0.00')}
+                                </BoxNum>
+                                %
+                            </div>
+                        </div>
+                    </div>)}
+                <div className='status-info'></div>
+                <div className='status-more'>공시자료 상세보기</div>
             </section>
 
             <section className='cocktail-story'>
