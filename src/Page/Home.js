@@ -76,6 +76,7 @@ export default function Home() {
     const [popup, setPopup] = useState();
     const [isOpen, setIsOpen] = useState(false);
 
+
     const numbers = (num) => {
         return numeral(num).format('0,0');
     }
@@ -120,8 +121,58 @@ export default function Home() {
         setIsOpen(true);
     }, []);
 
+
+    const customModalStyles = {
+        overlay: {
+            backgroundColor: "rgba(0, 0, 0, 0.4)",
+            width: "100%",
+            height: "100%",
+            zIndex: "5",
+            position: "fixed",
+            top: "0",
+            left: "0",
+        },
+        content: {
+            width: "550px",
+            height: "auto",
+            zIndex: "4",
+            position: "fixed",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            borderRadius: "10px",
+            padding: '56px 40px 48px 40px',
+            backgroundColor: "#ffffff",
+            justifyContent: "center",
+        },
+    };
+
     return (
         <div className='home'>
+            <div>
+                <Modal
+                    isOpen={isOpen}
+                    onRequestClose={() => setIsOpen(false)}
+                    style={customModalStyles}
+                    ariaHideApp={true}
+                    shouldCloseOnOverlayClick={false}
+                >
+                    <div className='popup-wrapper'>
+                        {popup && (popup.map((pp) => (
+                            <div>
+                                <div className='popup-title'>{pp.title}</div>
+                                <div className='popup-bar'></div>
+                                <div className='popup-content-box'>{pp.body.replace(/<[^>]+>/g, '')}</div>
+                                <div className='popup-bar'></div>
+                                <div className='popup-btn-nav'>
+                                    <button onClick={() => { setIsOpen(false)}} className='popup-btn'>오늘 하루 보지않기</button>
+                                </div>
+                                <div className='popup-btn-next'>법정공시정보 보기</div>
+                            </div>
+                        )))}
+                    </div>
+                </Modal>
+            </div>
             <section className='main'>
                 <div>
                     <Swiper
@@ -234,9 +285,15 @@ export default function Home() {
                                                 {dayjs(cd.opened_at).format('YYYY.MM.DD')}
                                             </div>
                                         </div>
-                                        <Progress className='progress-bar'>
-                                            <Dealt amount={cd.amount} investAmount={cd.invest_amount} />
-                                        </Progress>
+                                        <div className='progressbar-wrapper'>
+                                            <Progress className='progress-bar'>
+                                                <Dealt amount={cd.amount} investAmount={cd.invest_amount} />
+                                            </Progress>
+                                            <div className='progress-bar-num'>
+                                                <a>{`${Math.floor((cd.invest_amount / cd.amount) * 100)}%`}</a>
+                                                <a>{numeral(cd.amount / 1e4).format('0,0')}만원</a>
+                                            </div>
+                                        </div>
                                     </SwiperSlide>
                                 ))}
                             </Swiper>
@@ -265,7 +322,7 @@ export default function Home() {
             <section className='invest-status'>
                 {status && (
                     <div className='status-wrapper'>
-                        <div className='status-header' style={{ fontSize: '30px'}}>칵테일 펀딩 투자 현황
+                        <div className='status-header' style={{ fontSize: '30px' }}>칵테일 펀딩 투자 현황
                             <div className='status-date'>
                                 {datekor(status.baseDate)}
                             </div>
