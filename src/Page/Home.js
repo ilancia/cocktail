@@ -78,13 +78,20 @@ export default function Home() {
     const [openOnce, setOpenOnce] = useState(false);
     const color = ['rgb(250, 184, 3)', 'rgb(57, 104, 176)', 'rgb(0, 154, 157)', 'rgb(98, 46, 136)'];
 
-    const cardStatus = (x) =>{
-        if(x=="open"){
-            return x.replace("open","모집중");
-        }else if(x=="draft"){
-            return x.replace("draft","상환중");
-        }else if(x=="active"){
-            return x.replace("active","??중");
+    const tag = (x) => {
+        const word = x.split('#');
+        word.shift();
+        const result = word.map((x) => `#${x}`);
+        return result;
+    }
+
+    const cardStatus = (x) => {
+        if (x == "open") {
+            return x.replace("open", "모집중");
+        } else if (x == "draft") {
+            return x.replace("draft", "상환중");
+        } else if (x == "active") {
+            return x.replace("active", "모집예정");
         }
     }
 
@@ -180,7 +187,7 @@ export default function Home() {
                                 <div className='popup-content-box'>{pp.body.replace(/<[^>]+>/g, '')}</div>
                                 <div className='popup-bar'></div>
                                 <div className='popup-btn-nav'>
-                                    <button onClick={() => { localStorage.setOpenOnce(true); setIsOpen(false); }} className='popup-btn'>오늘 하루 보지않기</button>
+                                    <button onClick={() => { /*localStorage.setOpenOnce(true)*/; setIsOpen(false); }} className='popup-btn'>오늘 하루 보지않기</button>
                                 </div>
                                 <div className='popup-btn-next'>법정공시정보 보기</div>
                             </div>
@@ -287,9 +294,12 @@ export default function Home() {
                                     <SwiperSlide className='invest-card-wrapper'>
                                         <div className='invest-card'>
                                             <div className='invest-card-thumbnail' style={{ backgroundColor: color[index % color.length] }}>
-                                                <div>{cardStatus(cd.status)}</div>
-                                                {cd.product_tag}
-                                                <img src='../IMG_TOWER.png' alt='card-img' height={'70%'} width={'15%'}></img>
+                                                {/* {cd.status == "draft" && <div className='card-hide'>모집완료</div>} */}
+                                                <div className='card-status' style={{ color: color[index % color.length] }}>{cardStatus(cd.status)}</div>
+                                                <div className='card-tag-img'>
+                                                    <div className='card-tag'>{tag(cd.product_tag).map((t) => <div>{t}</div>)}</div>
+                                                    <img src='../IMG_TOWER.jpg' alt='card-img' height={'70%'} width={'15%'}></img>
+                                                </div>
                                             </div>
                                             <div className='card-name'>{cd.name}</div>
                                             <div className='card-title'>{cd.title}</div>
