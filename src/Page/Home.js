@@ -75,7 +75,18 @@ export default function Home() {
     const [story, setStory] = useState([]);
     const [popup, setPopup] = useState();
     const [isOpen, setIsOpen] = useState(false);
+    const [openOnce, setOpenOnce] = useState(false);
+    const color = ['rgb(250, 184, 3)', 'rgb(57, 104, 176)', 'rgb(0, 154, 157)', 'rgb(98, 46, 136)'];
 
+    const cardStatus = (x) =>{
+        if(x=="open"){
+            return x.replace("open","모집중");
+        }else if(x=="draft"){
+            return x.replace("draft","상환중");
+        }else if(x=="active"){
+            return x.replace("active","??중");
+        }
+    }
 
     const numbers = (num) => {
         return numeral(num).format('0,0');
@@ -93,6 +104,7 @@ export default function Home() {
 
     const date = (d) => { return dayjs(d).format('YYYY-MM-DD') };
     const datekor = (d) => { return dayjs(d).format('YYYY년 MM월 DD일 기준') };
+
     useEffect(() => {
         async function fetchAll() {
             try {
@@ -121,6 +133,9 @@ export default function Home() {
         setIsOpen(true);
     }, []);
 
+    const arry = (a) => {
+
+    }
 
     const customModalStyles = {
         overlay: {
@@ -135,7 +150,7 @@ export default function Home() {
         content: {
             width: "550px",
             height: "auto",
-            zIndex: "4",
+            zIndex: "6",
             position: "fixed",
             top: "50%",
             left: "50%",
@@ -165,7 +180,7 @@ export default function Home() {
                                 <div className='popup-content-box'>{pp.body.replace(/<[^>]+>/g, '')}</div>
                                 <div className='popup-bar'></div>
                                 <div className='popup-btn-nav'>
-                                    <button onClick={() => { setIsOpen(false)}} className='popup-btn'>오늘 하루 보지않기</button>
+                                    <button onClick={() => { localStorage.setOpenOnce(true); setIsOpen(false); }} className='popup-btn'>오늘 하루 보지않기</button>
                                 </div>
                                 <div className='popup-btn-next'>법정공시정보 보기</div>
                             </div>
@@ -255,7 +270,7 @@ export default function Home() {
                     <div className='invest-title'>
                         <div className='invest-header'>리더를 위한 쉬운 투자</div>
                         <div className='invest-card-swiper-pagination'></div>
-                        {card.length > 0 &&
+                        {card &&
                             <Swiper
                                 className='invest-card-swiper'
                                 slidesPerView={3}
@@ -268,30 +283,30 @@ export default function Home() {
                                 modules={[Pagination]}
                             // breakpoints={}
                             >
-                                {card.map((cd) => (
+                                {card.map((cd, index) => (
                                     <SwiperSlide className='invest-card-wrapper'>
-                                        <div className='invest-card-thumbnail'>
-                                            <div className='invest-card'>
-                                                <div>{cd.status}</div>
+                                        <div className='invest-card'>
+                                            <div className='invest-card-thumbnail' style={{ backgroundColor: color[index % color.length] }}>
+                                                <div>{cardStatus(cd.status)}</div>
                                                 {cd.product_tag}
                                                 <img src='../IMG_TOWER.png' alt='card-img' height={'70%'} width={'15%'}></img>
                                             </div>
-                                        </div>
-                                        <div className='card-name'>{cd.name}</div>
-                                        <div className='card-title'>{cd.title}</div>
-                                        <div className='card-info'>
-                                            <div className='card-item'>{cd.interest_rate} | {cd.term} | {cd.investment_category_name}</div>
-                                            <div className='card-date'>
-                                                {dayjs(cd.opened_at).format('YYYY.MM.DD')}
-                                            </div>
-                                        </div>
-                                        <div className='progressbar-wrapper'>
-                                            <Progress className='progress-bar'>
-                                                <Dealt amount={cd.amount} investAmount={cd.invest_amount} />
-                                            </Progress>
-                                            <div className='progress-bar-num'>
-                                                <a>{`${Math.floor((cd.invest_amount / cd.amount) * 100)}%`}</a>
-                                                <a>{numeral(cd.amount / 1e4).format('0,0')}만원</a>
+                                            <div className='card-name'>{cd.name}</div>
+                                            <div className='card-title'>{cd.title}</div>
+                                            <div className='progressbar-wrapper'>
+                                                <div className='card-info'>
+                                                    <div className='card-item'>{cd.interest_rate} | {cd.term} | {cd.investment_category_name}</div>
+                                                    <div className='card-date'>
+                                                        {dayjs(cd.opened_at).format('YYYY.MM.DD')}
+                                                    </div>
+                                                </div>
+                                                <Progress className='progress-bar'>
+                                                    <Dealt amount={cd.amount} investAmount={cd.invest_amount} />
+                                                </Progress>
+                                                <div className='progress-bar-num'>
+                                                    <a>{`${Math.floor((cd.invest_amount / cd.amount) * 100)}%`}</a>
+                                                    <a>{numeral(cd.amount / 1e4).format('0,0')}만원</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </SwiperSlide>
