@@ -255,8 +255,8 @@ body {
     background-color: #e1e1e1;
     border-radius: 10px;
     cursor: pointer;
-    width: 90%;
-    padding: 17px
+    width:auto;
+    padding: 17px;
 }
 .card-hide{
     width: 100%;

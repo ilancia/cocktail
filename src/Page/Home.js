@@ -19,6 +19,7 @@ import styled from "styled-components";
 import numeral from 'numeral';
 import dayjs from 'dayjs';
 import Modal from 'react-modal';
+import { returnFirstArg } from 'html-react-parser/lib/utilities'
 
 Modal.setAppElement('#root');
 
@@ -86,12 +87,12 @@ export default function Home() {
     }
 
     const cardStatus = (x) => {
-        if (x == "open") {
-            return x.replace("open", "모집중");
-        } else if (x == "draft") {
-            return x.replace("draft", "상환중");
+        if (x == "draft") {
+            return x.replace("draft", "모집예정");
         } else if (x == "active") {
-            return x.replace("active", "모집예정");
+            return x.replace("active", "상환중");
+        } else if (x == "completed") {
+            return x.replace("completed", "모집완료");
         }
     }
 
@@ -168,6 +169,15 @@ export default function Home() {
             justifyContent: "center",
         },
     };
+
+    const cardModal = {
+        content: {
+            width: "100%",
+            height: "100%",
+            backgroundColor: "black",
+            opacity: "0.6"
+        }
+    }
 
     return (
         <div className='home'>
@@ -288,13 +298,17 @@ export default function Home() {
                                     clickable: true,
                                 }}
                                 modules={[Pagination]}
-                            // breakpoints={}
                             >
                                 {card.map((cd, index) => (
                                     <SwiperSlide className='invest-card-wrapper'>
                                         <div className='invest-card'>
                                             <div className='invest-card-thumbnail' style={{ backgroundColor: color[index % color.length] }}>
-                                                {/* {cd.status == "draft" && <div className='card-hide'>모집완료</div>} */}
+                                                {Math.floor((cd.investAmount / cd.amount) * 100) == 100 &&
+                                                    <Modal
+                                                        style={cardModal}
+                                                        ariaHideApp={true}
+                                                    >
+                                                    </Modal>}
                                                 <div className='card-status' style={{ color: color[index % color.length] }}>{cardStatus(cd.status)}</div>
                                                 <div className='card-tag-img'>
                                                     <div className='card-tag'>{tag(cd.product_tag).map((t) => <div>{t}</div>)}</div>
