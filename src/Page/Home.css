@@ -204,16 +204,24 @@ body {
     height: auto;
 }
 
+.invest-wrapper {
+    margin: 40px 0;
+}
+
 .invest-header {
+    display: flex;
+    margin: 20px 0;
+}
+
+.invest-title {
+    width: 30%;
     font-size: 30px;
-    margin: 30px 0;
 }
 
 .invest-card-swiper-pagination {
     display: flex;
     justify-content: right;
     align-items: center;
-    margin-top: 20px;
 }
 
 .invest-card-swiper-pagination .swiper-pagination-bullet {
@@ -251,10 +259,11 @@ body {
     background-color: #e1e1e1;
     border-radius: 10px;
     cursor: pointer;
-    width:auto;
+    width: auto;
     padding: 17px;
 }
-.card-hide{
+
+.card-hide {
     width: 100%;
     height: 100%;
     background-color: #6a6a6a;
@@ -273,7 +282,8 @@ body {
     box-shadow: 0px 1px 3px #00000033;
     border-radius: 5px;
 }
-.card-tag-img{
+
+.card-tag-img {
     display: flex;
     justify-content: space-between;
 }
@@ -309,8 +319,7 @@ body {
 }
 
 .card-info {
-    padding-left: 3px;
-    padding-right: 3px;
+    padding: 0 3px;
     margin-top: 20px;
     font-size: 17px;
     color: #6a6a6a;
@@ -319,21 +328,21 @@ body {
     width: 100%;
 }
 
-.card-item{
-    font-size: 20px;
+.card-item {
+    font-size: 22px;
     font-weight: 500;
     display: flex;
-    width: 50%;
+    width: 60%;
     justify-content: space-between;
 }
 
 .card-date {
     padding-top: 3px;
-    font-size: 15px;
+    font-size: 20px;
     float: right;
 }
 
-.progressbar-wrapper {
+.progress-bar-wrapper {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
@@ -464,7 +473,13 @@ body {
     font-size: 35px;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: end;
+}
+
+.status-summery-inline {
+    color: #00999d;
+    display: flex;
+    align-items: end;
 }
 
 .status-summery-box {
@@ -474,7 +489,7 @@ body {
 }
 
 .status-box {
-    font-size: 30px;
+    font-size: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -485,13 +500,19 @@ body {
     border-radius: 8px;
     flex-direction: column;
     color: black;
+}
 
+.status-box-inline {
+    margin-left: 3px;
+    color: #6a6a6a;
+    font-size: 25px;
+    font-weight: 700;
 }
 
 .status-more {
     display: block;
     width: 100%;
-    margin: 30px auto;
+    margin: auto;
     margin-bottom: 88px;
     border: 1px solid #00a8ad;
     border-radius: 100px;
@@ -514,6 +535,7 @@ body {
     width: 100%;
     height: auto;
     background-image: linear-gradient(139deg, #fcfcfc, #fafafa);
+    padding: 50px 0;
 }
 
 .story-wrapper {
@@ -521,11 +543,15 @@ body {
     margin: auto;
 }
 
+.story-title {
+    font-size: 30px;
+    padding: 0 30px;
+}
+
 .story-swiper-pagination {
     display: flex;
     justify-content: right;
     align-items: center;
-    margin-top: 20px;
 }
 
 .story-swiper-pagination .swiper-pagination-bullet {
@@ -546,6 +572,7 @@ body {
 .story-swiper {
     height: auto;
     width: 100%;
+    padding: 20px 0;
 }
 
 .story-box {
@@ -560,8 +587,8 @@ body {
     padding: 32px;
 }
 
-.story-title {
-    font-weight: 600;
+.story-box-title {
+    font-weight: 700;
     line-height: 1.56;
     height: auto;
     overflow: hidden;
@@ -579,21 +606,25 @@ body {
     line-height: 25px;
     letter-spacing: -0.2px;
     color: #626261;
-    height: 100px;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    height: 120px;
+    margin-bottom: 1rem;
 }
 
 .story-body {
     height: 100%;
-    line-height: 25px;
+    line-height: 30px;
+    font-size: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 40px;
 }
 
 .story-more {
     float: right;
-    width: fit-content;
-    height: fit-content;
     cursor: pointer;
+    color: #1774ff;
+    font-size: 20px;
+    font-weight: 500;
 }
 
 .footer {

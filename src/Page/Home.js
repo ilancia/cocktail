@@ -24,6 +24,7 @@ import { returnFirstArg } from 'html-react-parser/lib/utilities'
 Modal.setAppElement('#root');
 
 const Progress = styled.div`
+    margin-top:3px;
     width: 100%;
     height: 5px;
     background-color: #e0e0e0;
@@ -40,11 +41,12 @@ const Status = styled.div`
     font-size:20px;
 `;
 const SummeryNum = styled.div`
-    font-size:40px;
+    display: flex;
+    font-size: 45px;
     color: #00999d;
     font-weight: 500;
 `;
-const BoxNum = styled.div`
+const BoxNum = styled.span`
     font-size:40px;
     color: black;
     font-weight:500;
@@ -283,9 +285,11 @@ export default function Home() {
             </section>
 
             <section className='leader-invest'>
-                <div className='invest-wapper'>
-                    <div className='invest-header'>리더를 위한 쉬운 투자</div>
-                    <div className='invest-card-swiper-pagination'></div>
+                <div className='invest-wrapper'>
+                    <div className='invest-header'>
+                        <div className='invest-title'>리더를 위한 쉬운 투자</div>
+                        <div className='invest-card-swiper-pagination'></div>
+                    </div>
                     {card &&
                         <Swiper
                             className='invest-card-swiper'
@@ -317,20 +321,14 @@ export default function Home() {
                                     </div>
                                     <div className='card-name'>{cd.name}</div>
                                     <div className='card-title'>{cd.title}</div>
-                                    <div className='progressbar-wrapper'>
+                                    <div className='progress-bar-wrapper'>
                                         <div className='card-info'>
                                             <div className='card-item'>
-                                                <div style={{ color: "#00999d", fontWeight: "700" }}>
-                                                    연 {cd.interest_rate}%
-                                                </div>
+                                                <div style={{ color: "#00999d", fontWeight: "700" }}>연 {cd.interest_rate}%</div>
                                                 |
-                                                <div>
-                                                    {cd.term}개월
-                                                </div>
+                                                <div>{cd.term}개월</div>
                                                 |
-                                                <div>
-                                                    {cd.investment_category_name}
-                                                </div>
+                                                <div>{cd.investment_category_name}</div>
                                             </div>
                                             <div className='card-date'>
                                                 {dayjs(cd.opened_at).format('YYYY.MM.DD')} 모집
@@ -378,58 +376,62 @@ export default function Home() {
                         </div>
                         <div className='status-summery'>
                             <div className='status-summery-text'>
-                                칵테일펀딩을 통해<SummeryNum>{numbers(status.countUser)}명</SummeryNum>의 회원이
+                                칵테일펀딩을 통해
+                                <div className='status-summery-inline'>
+                                    <SummeryNum>{numbers(status.countUser)}</SummeryNum>명
+                                </div>
+                                의 회원이
                             </div>
                             <div className='status-summery-text'>
-                                <SummeryNum>{numbers(status.investAmount)}원</SummeryNum>을 투자하여
+                                <div className='status-summery-inline'>
+                                    <SummeryNum>{numbers(status.investAmount)}</SummeryNum>원
+                                </div>
+                                을 투자하여
                             </div>
                             <div className='status-summery-text'>
-                                <SummeryNum>{numbers(status.investInterest)}원</SummeryNum>의 수익을 경험하셨습니다.
+                                <div className='status-summery-inline'>
+                                    <SummeryNum>{numbers(status.investInterest)}</SummeryNum>원
+                                </div>
+                                의 수익을 경험하셨습니다.
                             </div>
                         </div>
                         <div className='status-summery-box'>
                             <div className='status-box'>
-                                <Status>
-                                    누적 대출액
-                                </Status>
-                                <BoxNum>
-                                    {finNumbers(status.loanAmount)}원
-                                </BoxNum>
+                                <span style={{ marginBottom: "16px" }}>누적대출액</span>
+                                <span>
+                                    <BoxNum>{finNumbers(status.loanAmount)}</BoxNum>
+                                    <span className='status-box-inline'>원</span>
+                                </span>
                             </div>
                             <div className='status-box'>
-                                <Status>
-                                    총 상환금액
-                                </Status>
-                                <BoxNum>
-                                    {finNumbers(status.loanBalance)}원
-                                </BoxNum>
+                                <span style={{ marginBottom: "16px" }}>총 상환금액</span>
+                                <span>
+                                    <BoxNum>{finNumbers(status.totalReturnAmount)}</BoxNum>
+                                    <span className='status-box-inline'>원</span>
+                                </span>
                             </div>
                             <div className='status-box'>
-                                <Status>
-                                    대출 잔액
-                                </Status>
-                                <BoxNum>
-                                    {finNumbers(status.totalReturnAmount)}원
-                                </BoxNum>
+                                <span style={{ marginBottom: "16px" }}>대출잔액</span>
+                                <span>
+                                    <BoxNum>{finNumbers(status.loanBalance)}</BoxNum>
+                                    <span className='status-box-inline'>원</span>
+                                </span>
                             </div>
                             <div className='status-box'>
-                                <Status>
-                                    평균 수익률
-                                </Status>
-                                <BoxNum>
-                                    {numeral(status.avgInterestRate).format('0.00')}
-                                </BoxNum>
-                                %
+                                <span style={{ marginBottom: "16px" }}>평균 수익률</span>
+                                <span>
+                                    <BoxNum>{numeral(status.avgInterestRate).format('0.00')}</BoxNum>
+                                    <span className='status-box-inline'>%</span>
+                                </span>
                             </div>
                         </div>
-                        <div className='status-info'></div>
-                        <div className='status-more'>공시자료 상세보기</div>
                     </div>)}
+                        <div className='status-more'>공시자료 상세보기</div>
             </section>
 
             <section className='cocktail-story'>
                 <div className='story-wrapper'>
-                    <div style={{ fontSize: '30px', margin: '30px 0' }}>칵테일 펀딩 이야기</div>
+                    <div className='story-title'>칵테일 펀딩 이야기</div>
                     <div className='story-swiper-pagination'></div>
                     <Swiper
                         modules={[Pagination]}
@@ -444,11 +446,9 @@ export default function Home() {
                         {story.map((story) => (
                             <SwiperSlide >
                                 <div className='story-box'>
-                                    <div className='story-title'>{story.title}</div>
+                                    <div className='story-box-title'>{story.title}</div>
                                     <div className='story-body-wrapper'>
-                                        <p className='story-body'>
-                                            {story.body.replace(/<[^>]+>/g, '')}
-                                        </p>
+                                        <p className='story-body'>{story.body.replace(/<[^>]+>/g, '')}</p>
                                         <div className='story-more'>더보기</div>
                                     </div>
                                 </div>
