@@ -233,7 +233,7 @@ body {
 }
 
 .invest-card-swiper {
-    width: 100%;
+    width: auto;
     height: fit-content;
     margin: 20px 0;
 }
@@ -243,11 +243,7 @@ body {
     flex-wrap: wrap;
     flex-direction: column;
     width: 100%;
-}
-
-.invest-card {
-    width: 100%;
-    padding: 10px;
+    overflow: visible;
 }
 
 .invest-card-thumbnail {
@@ -321,6 +317,14 @@ body {
     display: flex;
     justify-content: space-between;
     width: 100%;
+}
+
+.card-item{
+    font-size: 20px;
+    font-weight: 500;
+    display: flex;
+    width: 50%;
+    justify-content: space-between;
 }
 
 .card-date {

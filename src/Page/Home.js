@@ -284,76 +284,86 @@ export default function Home() {
 
             <section className='leader-invest'>
                 <div className='invest-wapper'>
-                    <div className='invest-title'>
-                        <div className='invest-header'>리더를 위한 쉬운 투자</div>
-                        <div className='invest-card-swiper-pagination'></div>
-                        {card &&
-                            <Swiper
-                                className='invest-card-swiper'
-                                slidesPerView={3}
-                                spaceBetween={30}
-                                loop={true}
-                                pagination={{
-                                    el: '.invest-card-swiper-pagination',
-                                    clickable: true,
-                                }}
-                                modules={[Pagination]}
-                            >
-                                {card.map((cd, index) => (
-                                    <SwiperSlide className='invest-card-wrapper'>
-                                        <div className='invest-card'>
-                                            <div className='invest-card-thumbnail' style={{ backgroundColor: color[index % color.length] }}>
-                                                {Math.floor((cd.investAmount / cd.amount) * 100) == 100 &&
-                                                    <Modal
-                                                        style={cardModal}
-                                                        ariaHideApp={true}
-                                                    >
-                                                    </Modal>}
-                                                <div className='card-status' style={{ color: color[index % color.length] }}>{cardStatus(cd.status)}</div>
-                                                <div className='card-tag-img'>
-                                                    <div className='card-tag'>{tag(cd.product_tag).map((t) => <div>{t}</div>)}</div>
-                                                    <img src='../IMG_TOWER.jpg' alt='card-img' height={'70%'} width={'15%'}></img>
-                                                </div>
-                                            </div>
-                                            <div className='card-name'>{cd.name}</div>
-                                            <div className='card-title'>{cd.title}</div>
-                                            <div className='progressbar-wrapper'>
-                                                <div className='card-info'>
-                                                    <div className='card-item'>{cd.interest_rate} | {cd.term} | {cd.investment_category_name}</div>
-                                                    <div className='card-date'>
-                                                        {dayjs(cd.opened_at).format('YYYY.MM.DD')}
-                                                    </div>
-                                                </div>
-                                                <Progress className='progress-bar'>
-                                                    <Dealt amount={cd.amount} investAmount={cd.invest_amount} />
-                                                </Progress>
-                                                <div className='progress-bar-num'>
-                                                    <a>{`${Math.floor((cd.invest_amount / cd.amount) * 100)}%`}</a>
-                                                    <a>{numeral(cd.amount / 1e4).format('0,0')}만원</a>
-                                                </div>
+                    <div className='invest-header'>리더를 위한 쉬운 투자</div>
+                    <div className='invest-card-swiper-pagination'></div>
+                    {card &&
+                        <Swiper
+                            className='invest-card-swiper'
+                            slidesPerView={3}
+                            spaceBetween={30}
+                            loop={true}
+                            pagination={{
+                                el: '.invest-card-swiper-pagination',
+                                clickable: true,
+                            }}
+                            modules={[Pagination]}
+                        >
+                            {card.map((cd, index) => (
+                                <SwiperSlide className='invest-card-wrapper'>
+                                    <div className='invest-card-thumbnail' style={{ backgroundColor: color[index % color.length] }}>
+                                        {cd.investAmount == cd.amount &&
+                                            <Modal
+                                                style={cardModal}
+                                                ariaHideApp={true}
+                                            ><div className='card-hide'>모집완료</div>
+                                            </Modal>}
+                                        <div className='card-status' style={{ color: color[index % color.length] }}>{cardStatus(cd.status)}</div>
+                                        <div className='card-tag-img'>
+                                            <div className='card-tag'>{tag(cd.product_tag).map((t) => <div>{t}</div>)}</div>
+                                            <div>
+                                                <img src='../IMG_TOWER.jpg' alt='card-img' height={'70%'} width={'15%'}></img>
                                             </div>
                                         </div>
-                                    </SwiperSlide>
-                                ))}
-                            </Swiper>
-                        }
-                        <div className='invest-more' onClick={() => { }}>더보기</div>
+                                    </div>
+                                    <div className='card-name'>{cd.name}</div>
+                                    <div className='card-title'>{cd.title}</div>
+                                    <div className='progressbar-wrapper'>
+                                        <div className='card-info'>
+                                            <div className='card-item'>
+                                                <div style={{ color: "#00999d", fontWeight: "700" }}>
+                                                    연 {cd.interest_rate}%
+                                                </div>
+                                                |
+                                                <div>
+                                                    {cd.term}개월
+                                                </div>
+                                                |
+                                                <div>
+                                                    {cd.investment_category_name}
+                                                </div>
+                                            </div>
+                                            <div className='card-date'>
+                                                {dayjs(cd.opened_at).format('YYYY.MM.DD')} 모집
+                                            </div>
+                                        </div>
+                                        <Progress className='progress-bar'>
+                                            <Dealt amount={cd.amount} investAmount={cd.invest_amount} />
+                                        </Progress>
+                                        <div className='progress-bar-num'>
+                                            <a>{`${Math.floor((cd.invest_amount / cd.amount) * 100)}%`}</a>
+                                            <a>{numeral(cd.amount / 1e4).format('0,0')}만원</a>
+                                        </div>
+                                    </div>
+                                </SwiperSlide>
+                            ))}
+                        </Swiper>
+                    }
+                </div>
+                <div className='invest-more' onClick={() => { }}>더보기</div>
+                <div className='kakao-wrapper'>
+                    <div className='kakao-channel-wrapper'>
+                        <div className='kakao-text'>
+                            <h2 style={{ fontSize: '40px', fontWeight: '600', margin: '0' }}>리더를 위한 상품 알림</h2>
+                            <h2 style={{ margin: '0' }}>칵테일펀딩 채널 추가</h2>
+                        </div>
+                        <img className='kakao-img' src='https://v2.cocktailfunding.com/static/media/middle_banner_kakao.e74027ab.png' />
                     </div>
-                    <div className='kakao-wrapper'>
-                        <div className='kakao-channel-wrapper'>
-                            <div className='kakao-text'>
-                                <h2 style={{ fontSize: '40px', fontWeight: '600', margin: '0' }}>리더를 위한 상품 알림</h2>
-                                <h2 style={{ margin: '0' }}>칵테일펀딩 채널 추가</h2>
-                            </div>
-                            <img className='kakao-img' src='https://v2.cocktailfunding.com/static/media/middle_banner_kakao.e74027ab.png' />
+                    <div className='invest-limit-wrapper'>
+                        <div className='invest-limit-text'>
+                            <h2 style={{ fontSize: '40px', fontWeight: '600', margin: '0' }}>내 투자한도는?</h2>
+                            <h2 style={{ margin: '0' }}>개인 소득적격 법인 투자자</h2>
                         </div>
-                        <div className='invest-limit-wrapper'>
-                            <div className='invest-limit-text'>
-                                <h2 style={{ fontSize: '40px', fontWeight: '600', margin: '0' }}>내 투자한도는?</h2>
-                                <h2 style={{ margin: '0' }}>개인 소득적격 법인 투자자</h2>
-                            </div>
-                            <img className='invest-limit-img' src='https://v2.cocktailfunding.com/static/media/middle_banner_limit.d461ed2f.png' />
-                        </div>
+                        <img className='invest-limit-img' src='https://v2.cocktailfunding.com/static/media/middle_banner_limit.d461ed2f.png' />
                     </div>
                 </div>
             </section >
