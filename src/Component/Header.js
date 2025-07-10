@@ -4,7 +4,6 @@ import './Header.css'
 export default function Header() {
     const navigate = useNavigate();
 
-
     return (
         <div className='header'>
             <div className='header-container'>

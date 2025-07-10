@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import Loan from './Loan'
 import Investment from './Investment'
@@ -9,7 +9,7 @@ import Faq from './Faq'
 import Login from './Login'
 import Signup from './Signup'
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Autoplay, Grid } from 'swiper/modules';
+import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -19,7 +19,6 @@ import styled from "styled-components";
 import numeral from 'numeral';
 import dayjs from 'dayjs';
 import Modal from 'react-modal';
-import { returnFirstArg } from 'html-react-parser/lib/utilities'
 
 Modal.setAppElement('#root');
 
@@ -36,9 +35,6 @@ const Dealt = styled.div`
     height: 100%;
     background-color: #00999d;
     width: ${(props) => `${Math.floor((props.investAmount / props.amount) * 100)}%`};
-`;
-const Status = styled.div`
-    font-size:20px;
 `;
 const SummeryNum = styled.div`
     display: flex;
@@ -159,7 +155,6 @@ export default function Home() {
         },
         content: {
             width: "550px",
-            height: "auto",
             zIndex: "6",
             position: "fixed",
             top: "50%",
@@ -171,15 +166,6 @@ export default function Home() {
             justifyContent: "center",
         },
     };
-
-    const cardModal = {
-        content: {
-            width: "100%",
-            height: "100%",
-            backgroundColor: "black",
-            opacity: "0.6"
-        }
-    }
 
     return (
         <div className='home'>
@@ -207,6 +193,7 @@ export default function Home() {
                     </div>
                 </Modal>
             </div>
+
             <section className='main'>
                 <div>
                     <Swiper
@@ -305,12 +292,10 @@ export default function Home() {
                             {card.map((cd, index) => (
                                 <SwiperSlide className='invest-card-wrapper'>
                                     <div className='invest-card-thumbnail' style={{ backgroundColor: color[index % color.length] }}>
-                                        {cd.investAmount == cd.amount &&
-                                            <Modal
-                                                style={cardModal}
-                                                ariaHideApp={true}
-                                            ><div className='card-hide'>모집완료</div>
-                                            </Modal>}
+                                        {cd.invest_amount == cd.amount &&
+                                            <div className='card-hide'>
+                                                <span className='card-hide-text'>모집완료</span>
+                                            </div>}
                                         <div className='card-status' style={{ color: color[index % color.length] }}>{cardStatus(cd.status)}</div>
                                         <div className='card-tag-img'>
                                             <div className='card-tag'>{tag(cd.product_tag).map((t) => <div>{t}</div>)}</div>
@@ -370,9 +355,7 @@ export default function Home() {
                 {status && (
                     <div className='status-wrapper'>
                         <div className='status-header' style={{ fontSize: '30px' }}>칵테일 펀딩 투자 현황
-                            <div className='status-date'>
-                                {datekor(status.baseDate)}
-                            </div>
+                            <div className='status-date'>{datekor(status.baseDate)}</div>
                         </div>
                         <div className='status-summery'>
                             <div className='status-summery-text'>
@@ -426,7 +409,7 @@ export default function Home() {
                             </div>
                         </div>
                     </div>)}
-                        <div className='status-more'>공시자료 상세보기</div>
+                <div className='status-more'>공시자료 상세보기</div>
             </section>
 
             <section className='cocktail-story'>
