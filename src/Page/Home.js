@@ -300,7 +300,7 @@ export default function Home() {
                                         <div className='card-tag-img'>
                                             <div className='card-tag'>{tag(cd.product_tag).map((t) => <div>{t}</div>)}</div>
                                             <div>
-                                                <img src='../IMG_TOWER.jpg' alt='card-img' height={'70%'} width={'15%'}></img>
+                                                <img src='../imgs/IMG_TOWER.jpg' alt='card-img' height={'70%'} width={'15%'}></img>
                                             </div>
                                         </div>
                                     </div>
